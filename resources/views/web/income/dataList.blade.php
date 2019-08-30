@@ -13,7 +13,7 @@
                                     All Income Information
                                 </div>
                                 <div class="col-md-6 text-right padnone">
-                                    <a href="{{url('/income/create')}}" class="btn btn-info btn-fill btn-sm btnu"><i class="fa fa-plus-circle"></i> Add Income</a>
+                                    <a href="{{route('income.create')}}" class="btn btn-info btn-fill btn-sm btnu"><i class="fa fa-plus-circle"></i> Add Income</a>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>

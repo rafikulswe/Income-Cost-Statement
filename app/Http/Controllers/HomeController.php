@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Charts;
+use Auth;
 use App\Income;
 use App\Expense;
 use Carbon\Carbon;
@@ -50,6 +51,7 @@ class HomeController extends Controller
         //     ->elementLabel("Total")
         //     ->responsive(true)
         //     ->lastByDay(7, true);
+        $user_id = Auth::user()->id;
         $to = Carbon::now()->format('Y-m-d');
         $from = date('Y-m-d', strtotime('-7 days', strtotime($to)));
         $data['last_7days_income'] = Income::where('valid',1)->whereBetween('income_date', [$from, $to])->get();

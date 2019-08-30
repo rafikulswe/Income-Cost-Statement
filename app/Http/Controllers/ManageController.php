@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 use App\Income;
 use App\IncomeCategory;
 use App\ExpenseCategory;
@@ -16,7 +17,8 @@ class ManageController extends Controller
         $this->middleware('auth');
     }
     public function index(){
-        $data['allincate']=IncomeCategory::where('valid','1')->count();
+        $user_id = Auth::user()->id;
+        $data['allincate']=IncomeCategory::where('valid','1')->where('user_id', $user_id)->count();
         $data['allexpcate']=ExpenseCategory::where('valid','1')->count();
         $data['loaner']=Lender::where('valid','1')->count();
         // $basic=Basic::where('basic_status','1')->count();
