@@ -1,0 +1,376 @@
+@charset "utf-8";
+/* CSS Document */
+*{
+	margin:0px;
+	padding:0px;
+	outline:0px;
+	}
+
+img{
+	border:0px;
+	}
+	
+ul, ol{
+	list-style-type:none;
+	}
+	
+a{
+	text-decoration:none;
+	}
+	
+.clr{
+	clear:both;
+	}
+	
+body{
+	
+	}
+	
+.text_panel_head{
+	font-size:18px;
+	text-transform:capitalize;
+	font-weight:bold;
+	margin-top:2px;
+	}
+	
+.padnone{
+	padding:0px;
+	}
+	
+.panel_heading_customize{
+	padding:4px 15px;
+	}
+
+	
+.btnu{
+	border-radius:3px;
+	text-transform:uppercase;
+	font-weight:bold;
+	}
+	
+.btnm{
+	border-radius:3px;
+	font-weight:bold;
+	font-size:14px;
+	}
+	
+.padright{
+	padding-right:0px!important;
+	}
+	
+.padleft{
+	padding-left:0px!important;
+	}
+	
+.table_customize{
+	
+	}
+	
+.table_customize tr{
+	
+	}
+	
+.table_customize tr th{
+	background-color:#f5f5f5;
+	color:#000;
+	font-size:15px!important;
+	font-weight:bold!important;
+	}
+	
+.table_customize tr td{
+	
+	}
+	
+.add_admin_info{
+	margin-top:20px;
+	}
+	
+.add_admin_info > .form-group{
+	margin-bottom:0px;
+	}
+	
+.add_admin_info > .form-group > label.control-label{
+	color:#000!important;
+	margin-top:7px;
+	font-weight:bold;
+	}
+	
+.input_field{
+	border:1px solid #ddd!important;
+	background-color:#fff;
+	}
+	
+.input_field:hover, .input_field:focus{
+	box-shadow:0px 0px 1px #000; 
+	background-color:#fff!important;
+	}
+	
+.has-error > .form-control:hover, .has-error > .form-control:focus{
+	box-shadow:0px 0px 1px #000; 
+	background-color:#fff!important;
+	}
+	
+.form-control:hover, .form-control:focus{
+	box-shadow:0px 0px 1px #000; 
+	background-color:#fff!important;
+	}
+	
+/*Image Upload code start*/
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background:#fff;
+    cursor: inherit;
+    display: block;
+}
+
+#img-upload{
+	width:50%!important;
+}
+
+
+.breadcrumb{
+	margin-bottom:0px;
+	}
+	
+span.req_star{
+	color:red;
+	font-weight:bold;
+	}
+	
+/*laravel error message code*/
+
+.help-block{
+	margin-bottom:0px!important;
+	font-weight:400;
+	font-style:italic;
+	padding-left:10px;
+	margin-top:2px!important;
+	font-size:13px;
+	color:red!important;
+	}
+	
+.table_summary tr th.details, .table_summary tr td.details{
+	width:50%;
+	}
+	
+.selbox{
+	border:1px solid #ddd!important;
+	background-color:#fff;
+	}
+	
+.selbox:hover, .selbox:focus{
+	box-shadow:0px 0px 2px #000; 
+	}
+	
+.{
+	color:#F00!important;
+	}
+	
+.add_admin_info > .has-error > label.control-label{
+	color:red!important;
+	}
+	
+table.view_table{
+	margin-top:20px;
+	}
+	
+table.view_table tr{
+	
+	}
+	
+table.view_table tr td:first-child{
+	width:28%;
+	font-weight:bold;
+	text-align:right;
+	}
+	
+table.view_table tr td:last-child{
+	width:70%;
+	text-align:left;
+	}
+	
+.datepicker-dropdown{
+	opacity:1!important;
+	visibility:visible!important;
+	}
+	
+.month_infotext{
+	margin-top:10px;
+	}
+	
+.month_infotext p{
+	font-size:14px;
+	font-weight:bold;
+	text-align:right;
+	padding-right:20px;
+	color:#000;
+	}
+	
+.month_infotext p span{
+	color:#EB5E28;
+	font-size:15px;
+	padding-left:3px;
+	}
+	
+.input_box{
+	border:1px solid #ccc!important;	
+	border-radius:5px;
+	font-family: 'Muli', "Helvetica", Arial, sans-serif;
+	}
+	
+.input_box .form-control{
+	background-color:#fff!important;
+	}
+	
+.input_box .input-group-addon{
+	background-color:#ccc!important;
+	color:#000;
+	}
+	
+.input_box:hover, .input_box:focus{ 
+	background-color:#fff!important;
+	}
+	
+span.tospan{
+	font-size:12px;
+	text-transform:lowercase;
+	color:red;
+	}
+	
+span.fromdate{
+	color:#60C;
+	font-size:14px;
+	}
+	
+span.todate{
+	color:#639;
+	font-size:14px;
+	}
+	
+.double_button{
+	margin-left:10px;
+	}
+	
+.dataTables_length select{
+	background-color:#fff;
+	border:1px solid #ddd;
+	font-size:13px;
+	}
+	
+.dataTables_filter input{
+	background-color:#fff;
+	border:1px solid #ddd;
+	font-size:14px;
+	}
+	
+.manage_icon{
+	text-align:left;
+	}
+	
+.manage_text_part{
+	font-size:22px;
+	font-weight:bold;
+	text-align:right;
+	color:#333;
+	line-height:25px;
+	}
+	
+.manage_text_part p{
+	font-size:18px;
+	font-weight:bold;
+	text-align:right;
+	line-height:22px;
+	color:#333;
+	}
+	
+.modal-backdrop{
+	position:relative!important;
+	}
+	
+.modal_popup{
+	font-size:18px;
+	text-align:center;
+	}
+	
+.details_part{
+	
+	}
+	
+.details_pic_part{
+	margin-top:18px;
+	}
+	
+p.details_ninfo{
+	color:#000;
+	font-weight:bold;
+	font-size:15px;
+	text-align:center;
+	}
+	
+table.details_table{
+	}
+
+table.details_table tr {
+	
+	}
+	
+table.details_table tr th{
+	background-color:#f5f5f5;
+	color:#000;
+	padding-left:10px;
+	font-size:17px;
+	}
+	
+.popup_box_input {
+	margin-top:15px;
+	}
+	
+.popup_box_input .control-label{
+	padding:0px;
+	color:#000;
+	font-size:14px;
+	margin-top:7px;
+	}
+	
+.pop_input_field{
+	border:1px solid #ccc;
+	background-color:#fff!important;
+	} 
+	
+.pop_input_field:hover{
+	border:1px solid #ddd;
+	box-shadow:inset 0px 0px 1px #000;
+	}
+	
+.pop_input_field:focus{
+	border:1px solid #ddd;
+	box-shadow:none;
+	}
+	
+table.details_status{
+	margin-top:-22px!important;
+	}
+	
+table.details_status tr th{
+	font-size:14px!important;
+	background-color:#333;
+	color:#fff;
+	}
+	
+
+	
+
+	
