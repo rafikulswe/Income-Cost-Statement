@@ -77,7 +77,7 @@
 <section class="body-sign">
     <div class="center-sign">
         <a href="/" class="logo pull-left">
-            <img src="{{ asset('public/contents/images/logo.png') }}" height="54" alt="Porto Admin" />
+            <img src="{{ asset('public/authContents/images/logo.png') }}" height="54" alt="Porto Admin" />
         </a>
 
         <div class="panel panel-sign">
