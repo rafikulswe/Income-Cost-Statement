@@ -27,17 +27,21 @@ Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::resource('income', 'IncomeController');
 Route::get('income', array('access' => ['resource|income.index'], 'as' => 'income', 'uses' => 'IncomeController@index'));
 
-// Income Category
+
+// Income Category (Resource)
 Route::resource('incomeCategory', 'IncomeCategoryController');
+Route::get('incomeCategory', array('access' => ['resource|incomeCategory.index'], 'as' => 'incomeCategory', 'uses' => 'IncomeCategoryController@index'));
+
+// Expense Category (Resource)
+Route::resource('expenseCategory', 'ExpenseCategoryController');
+Route::get('expenseCategory', array('access' => ['resource|expenseCategory.index'], 'as' => 'expenseCategory', 'uses' => 'ExpenseCategoryController@index'));
+
+// Expense (Resource)
+Route::resource('expense', 'ExpenseController');
+Route::get('expense', array('access' => ['resource|expense.index'], 'as' => 'expense', 'uses' => 'ExpenseController@index'));
 
 // Manage
 Route::get('/manage', 'ManageController@index')->name('manage');
-
-// Route::get('/income', 'IncomeController@index')->name('income');
-// Route::get('/createIncome', 'IncomeController@create')->name('createIncome');
-// Route::post('/saveIncome', 'IncomeController@store')->name('saveIncome');
-// Route::get('/editIncome/{id}', 'IncomeController@edit')->name('editIncome','id');
-// Route::post('/updateIncome', 'IncomeController@update')->name('updateIncome');
 
 Route::prefix('admin')->group(function() {
 	Route::get('/','softAdmin\LoginController@showLoginForm')->name('admin.login');

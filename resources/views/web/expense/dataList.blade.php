@@ -10,10 +10,10 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="col-md-6 text_panel_head padnone">
-                                    All Income Information
+                                    All Expense Information
                                 </div>
                                 <div class="col-md-6 text-right padnone">
-                                    <a href="{{route('income.create')}}" class="btn btn-info btn-fill btn-sm btnu"><i class="fa fa-plus-circle"></i> Add Income</a>
+                                    <a href="{{route('expense.create')}}" class="btn btn-info btn-fill btn-sm btnu"><i class="fa fa-plus-circle"></i> Add Expense</a>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -29,32 +29,32 @@
                                         <thead>
                                             <tr>
                                                 <th>SL.</th>
-                                                <th>Income Category</th>
-                                                <th>Income Name</th>
-                                                <th>Income Date</th>
-                                                <th>income Amount</th>
+                                                <th>Expense Category</th>
+                                                <th>Expense Name</th>
+                                                <th>Expense Date</th>
+                                                <th>Expense Amount</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @if(count($all_incomes)>0)
+                                            @if(count($all_expenses)>0)
                                             <?php 
-                                                $total_income = 0;
+                                                $total_expense = 0;
                                             ?>
-                                            @foreach($all_incomes as $key => $income)
+                                            @foreach($all_expenses as $key => $expense)
                                             <tr>
                                                 <td>{{++$key}}</td>
-                                                <td>{{$income->category_name}}</td>
-                                                <td>{{$income->income_name}}</td>
-                                                <td>{{$income->income_date}}</td>
-                                                <td align="right">{{$income->income_amount}} ৳</td>
+                                                <td>{{$expense->category_name}}</td>
+                                                <td>{{$expense->expense_name}}</td>
+                                                <td>{{$expense->expense_date}}</td>
+                                                <td align="right">{{$expense->expense_amount}} ৳</td>
                                                 <td>
-                                                    <a href="{{route('income.show', [$income->id])}}"><i class="fa fa-plus-square fa-lg man_view"></i></a>
-                                                    <a href="{{route('income.edit', [$income->id])}}"><i class="fa fa-edit fa-lg man_edit"></i></a>
-                                                    <a id="softDelete" data-toggle="modal" data-target="#mySoftDelete" data-id="{{$income->id}}" href="#"><i class="fa fa-trash fa-lg man_delete"></i></a>
+                                                    <a href="{{route('expense.show', [$expense->id])}}"><i class="fa fa-plus-square fa-lg man_view"></i></a>
+                                                    <a href="{{route('expense.edit', [$expense->id])}}"><i class="fa fa-edit fa-lg man_edit"></i></a>
+                                                    <a id="softDelete" data-toggle="modal" data-target="#mySoftDelete" data-id="{{$expense->id}}" href="#"><i class="fa fa-trash fa-lg man_delete"></i></a>
                                                 </td>
                                             </tr>
-                                            <?php $total_income += $income->income_amount; ?>
+                                            <?php $total_expense += $expense->expense_amount; ?>
                                             @endforeach
                                             @else 
                                             <tr>
@@ -66,8 +66,8 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th colspan="4" class="details" style="text-align: right;">Total Income</th>
-                                                <th style="text-align: right;">{{@$total_income}} ৳</th>
+                                                <th colspan="4" class="details" style="text-align: right;">Total Expense</th>
+                                                <th style="text-align: right;">{{@$total_expense}} ৳</th>
                                                 <th colspan="1"></th>
                                             </tr>
                                         </tfoot>
@@ -87,7 +87,7 @@
     <!-- Modal -->
     <div class="modal fade" id="mySoftDelete" tabindex="-1" role="dialog" aria-labelledby="mySoftDeleteLabel">
         <div class="modal-dialog" role="document">
-        <form method="post" action="{{route('income.destroy', [@$income->id])}}">
+        <form method="post" action="{{route('expense.destroy', [@$expense->id])}}">
             @method('DELETE')
             {{csrf_field()}}
             <div class="modal-content primary">

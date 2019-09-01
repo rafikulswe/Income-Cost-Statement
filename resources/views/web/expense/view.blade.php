@@ -9,11 +9,8 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="col-md-6 text_panel_head padnone ">
-                                    View Income Details
+                                    View Expense Details
                                 </div>
-                                {{-- <div class="col-md-6 text-right padnone">
-                                    <a href="{{url('/incomeCategory')}}" class="btn btn-info btn-fill btn-sm btnu"><i class="fa fa-th"></i> All Category</a>
-                                </div> --}}
                                 <div class="clearfix"></div>
                             </div>
                             <div class="panel-body">
@@ -24,42 +21,42 @@
                                             <td>Category Name</td>
                                             <td>:</td>
                                             <td>
-                                                {{$income->category_name}}
+                                                {{$expense->category_name}}
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Income Name</td>
+                                            <td>Expense Name</td>
                                             <td>:</td>
                                             <td>
-                                                {{$income->income_name}}
+                                                {{$expense->expense_name}}
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Income Date</td>
+                                            <td>Expense Date</td>
                                             <td>:</td>
                                             <td>
-                                                {{$income->income_date}}
+                                                {{$expense->expense_date}}
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Income Amount</td>
+                                            <td>Expense Amount</td>
                                             <td>:</td>
                                             <td>
-                                                {{$income->income_amount}} ৳
+                                                {{$expense->expense_amount}} ৳
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Created Time</td>
                                             <td>:</td>
                                             <td>
-                                                {{$income->created_at}}
+                                                {{$expense->created_at}}
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Remarks</td>
                                             <td>:</td>
                                             <td>
-                                                {{$income->income_details}}
+                                                {{$expense->expense_details}}
                                             </td>
                                         </tr>
                                     </table>
@@ -68,7 +65,7 @@
                             </div>
                             <div class="panel-footer">
                                 <a href="#" class="btn btn-sm btn-fill btnu btn-primary printMe">Print</a>
-                                <a href="{{route('income')}}" class="btn btn-sm btn-fill btn-default btnu">Back to List</a>
+                                <a href="{{route('expense')}}" class="btn btn-sm btn-fill btn-default btnu">Back to List</a>
                             </div>
                         </div>
                     </div>

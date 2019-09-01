@@ -113,8 +113,8 @@
                                     Last 7 Days Status
                                 </div>
                                 <div class="col-md-6 text-right padnone">
-                                    <a href="{{route('income')}}" class="btn btn-info btn-fill btn-sm btnu"><i class="fa fa-plus-circle"></i> Income</a>
-                                    <a href="{{url('/admin/expense/add')}}" class="btn btn-info btn-fill btn-sm btnu"><i class="fa fa-plus-circle"></i> Expense</a>
+                                    <a href="{{route('income.create')}}" class="btn btn-info btn-fill btn-sm btnu"><i class="fa fa-plus-circle"></i> Income</a>
+                                    <a href="{{route('expense.create')}}" class="btn btn-info btn-fill btn-sm btnu"><i class="fa fa-plus-circle"></i> Expense</a>
                                     <a href="{{url('/admin/summary')}}" class="btn btn-info btn-fill btn-sm btnu"><i class="fa fa-th"></i> Summary</a>
                                 </div>
                                 <div class="clearfix"></div>
@@ -144,7 +144,7 @@
                                             @foreach($last_7days_expense as $data)
                                             <tr>
                                                 <td>{{$data->expense_date}}</td>
-                                                <td>{{$data->giveme->expcate_name}}</td>
+                                                <td>{{$data->expcate_name}}</td>
                                                 <td class="details">{{$data->expense_details}}</td>
                                                 <td>---</td>
                                                 <td>{{$data->expense_amount}}</td>

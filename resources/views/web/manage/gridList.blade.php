@@ -82,7 +82,7 @@
                             <div class="footer">
                                 <hr />
                                 <div class="stats">
-                                    <a href="{{url('/incomeCategory')}}"><i class="fa fa-share-square fa-lg"></i> Manage Income Category</a>
+                                    <a href="{{route('incomeCategory')}}"><i class="fa fa-share-square fa-lg"></i> Manage Income Category</a>
                                 </div>
                             </div>
                         </div>
@@ -111,7 +111,7 @@
                             <div class="footer">
                                 <hr />
                                 <div class="stats">
-                                    <a href="{{url('/admin/expense/category')}}"><i class="fa fa-share-square fa-lg"></i> Manage Expense Category</a>
+                                    <a href="{{route('expenseCategory')}}"><i class="fa fa-share-square fa-lg"></i> Manage Expense Category</a>
                                 </div>
                             </div>
                         </div>

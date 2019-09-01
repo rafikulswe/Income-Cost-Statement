@@ -54,12 +54,12 @@ class HomeController extends Controller
         $user_id = Auth::user()->id;
         $to = Carbon::now()->format('Y-m-d');
         $from = date('Y-m-d', strtotime('-7 days', strtotime($to)));
-        $data['last_7days_income'] = Income::where('valid',1)->whereBetween('income_date', [$from, $to])->get();
-        $data['last_7days_all_income'] = Income::where('valid',1)->where('income_date','<=',$to)->where('income_date','>=',$from)->sum('income_amount');
-        $data['last_7days_expense'] = Expense::where('valid',1)->where('expense_date','<=',$to)->where('expense_date','>=',$from)->get();
-        $data['last_7days_all_expense'] = Expense::where('valid',1)->where('expense_date','<=',$to)->where('expense_date','>=',$from)->sum('expense_amount');
-        $data['totalIncome'] = Income::where('valid',1)->sum('income_amount');
-        $data['totalExpense'] = Expense::where('valid',1)->sum('expense_amount');
+        $data['last_7days_income'] = Income::where('valid',1)->where('user_id', $user_id)->whereBetween('income_date', [$from, $to])->get();
+        $data['last_7days_all_income'] = Income::where('valid',1)->where('user_id', $user_id)->where('income_date','<=',$to)->where('income_date','>=',$from)->sum('income_amount');
+        $data['last_7days_expense'] = Expense::where('valid',1)->where('user_id', $user_id)->where('expense_date','<=',$to)->where('expense_date','>=',$from)->get();
+        $data['last_7days_all_expense'] = Expense::where('valid',1)->where('user_id', $user_id)->where('expense_date','<=',$to)->where('expense_date','>=',$from)->sum('expense_amount');
+        $data['totalIncome'] = Income::where('valid',1)->where('user_id', $user_id)->sum('income_amount');
+        $data['totalExpense'] = Expense::where('valid',1)->where('user_id', $user_id)->sum('expense_amount');
         // return view('dashboard.dashboard', compact('totalIncome','totalExpense',"donut", "areaspline","last_7days_income","last_7days_expense","last_7days_all_income","last_7days_all_expense","chart"));
         return view('web.dashboard.home', $data);
     }

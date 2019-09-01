@@ -50,7 +50,7 @@ setTimeout(function() {
  
 //Datepicker setting code start
  $(function(){
-	 $('#income_date').datepicker({
+	 $('.pick_date').datepicker({
 		autoclose: true,
 		format: 'yyyy-mm-dd',
 		todayHighlight: true
