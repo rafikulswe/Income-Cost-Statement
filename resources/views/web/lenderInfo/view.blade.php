@@ -99,6 +99,18 @@
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-md-6">
+                                        @if(Session::has('message'))
+                                        <div class="alert alert-success alert-dismissible" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <strong>Success!</strong> {{Session::get('message')}}
+                                        </div>
+                                        @endif
+                                        @if(Session::has('error'))
+                                        <div class="alert alert-danger alert-dismissible" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <strong>Error!</strong> {{Session::get('error')}}
+                                        </div>
+                                        @endif
                                         <table id="" class="table table-striped table-bordered details_table">
                                             <tr>
                                                 <th colspan="7"><i class="fa fa-gg-circle"></i> Payment Status (Taken Loan)</th>
@@ -106,43 +118,40 @@
                                         </table>
                                         <table id="loanerstatus" class="table table-striped table-responsive table-bordered details_table details_status">
                                             <thead>
-                                            <tr>
-                                                <th>Date</th>
-                                                <th class="xs-hidden">Next Transaction Date</th>
-                                                <th>Category</th>
-                                                <th>Credit</th>
-                                                <th>Debit</th>
-                                            </tr>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th class="xs-hidden">Next Transaction Date</th>
+                                                    <th>Category</th>
+                                                    <th>Credit</th>
+                                                    <th>Debit</th>
+                                                </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td class="xs-hidden"></td>
-                                                <td>Received</td>
-                                                <td></td>
-                                                <td>---</td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td class="xs-hidden"></td>
-                                                <td>Paid</td>
-                                                <td>---</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td class="xs-hidden"></td>
-                                                <td>Given</td>
-                                                <td>---</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td class="xs-hidden"></td>
-                                                <td>Payment</td>
-                                                <td></td>
-                                                <td>---</td>
-                                            </tr>
+                                                @if (count($all_received_loans) > 0 || count($all_paid_loans) > 0)
+                                                @foreach ($all_received_loans as $received_loan)
+                                                <tr>
+                                                    <td>{{$received_loan->transaction_date}}</td>
+                                                    <td class="xs-hidden">{{$received_loan->return_date}}</td>
+                                                    <td>Received</td>
+                                                    <td>{{$received_loan->amount}}</td>
+                                                    <td>---</td>
+                                                </tr>
+                                                @endforeach
+
+                                                @foreach ($all_paid_loans as $paid_loan)
+                                                <tr>
+                                                    <td>{{$paid_loan->transaction_date}}</td>
+                                                    <td class="xs-hidden">{{$paid_loan->return_date}}</td>
+                                                    <td>Paid</td>
+                                                    <td>---</td>
+                                                    <td>{{$paid_loan->amount}}</td>
+                                                </tr>
+                                                @endforeach
+                                                @else 
+                                                <tr>
+                                                    <td colspan="5" align="center">No Transaction are available.</td>
+                                                </tr>
+                                                @endif
                                             </tbody>
                                             <tfoot>
                                             <tr></tr>
@@ -152,6 +161,18 @@
                                         <a href="#" class="btn btn-sm btn-fill btnu btn-info" data-toggle="modal" data-target=".loan_paid_part">Loan Paid</a>
                                     </div>
                                     <div class="col-md-6">
+                                        @if(Session::has('message'))
+                                        <div class="alert alert-success alert-dismissible" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <strong>Success!</strong> {{Session::get('message')}}
+                                        </div>
+                                        @endif
+                                        @if(Session::has('error'))
+                                        <div class="alert alert-danger alert-dismissible" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <strong>Error!</strong> {{Session::get('error')}}
+                                        </div>
+                                        @endif
                                         <table id="" class="table table-striped table-bordered details_table">
                                             <tr>
                                                 <th colspan="7"><i class="fa fa-gg-circle"></i> Payment Status (Given Loan)</th>
@@ -159,43 +180,40 @@
                                         </table>
                                         <table id="loanerstatus" class="table table-striped table-responsive table-bordered details_table details_status">
                                                 <thead>
-                                                <tr>
-                                                    <th>Date</th>
-                                                    <th class="xs-hidden">Next Transaction Date</th>
-                                                    <th>Category</th>
-                                                    <th>Credit</th>
-                                                    <th>Debit</th>
-                                                </tr>
+                                                    <tr>
+                                                        <th>Date</th>
+                                                        <th class="xs-hidden">Next Transaction Date</th>
+                                                        <th>Category</th>
+                                                        <th>Credit</th>
+                                                        <th>Debit</th>
+                                                    </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr>
-                                                    <td></td>
-                                                    <td class="xs-hidden"></td>
-                                                    <td>Received</td>
-                                                    <td></td>
-                                                    <td>---</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td class="xs-hidden"></td>
-                                                    <td>Paid</td>
-                                                    <td>---</td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td class="xs-hidden"></td>
-                                                    <td>Given</td>
-                                                    <td>---</td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td class="xs-hidden"></td>
-                                                    <td>Payment</td>
-                                                    <td></td>
-                                                    <td>---</td>
-                                                </tr>
+                                                    @if (count($all_given_loans) > 0 || count($all_payment_loans) > 0)
+                                                    @foreach ($all_given_loans as $given_loan)
+                                                    <tr>
+                                                        <td>{{$given_loan->transaction_date}}</td>
+                                                        <td class="xs-hidden">{{$given_loan->return_date}}</td>
+                                                        <td>Given</td>
+                                                        <td>{{$given_loan->amount}}</td>
+                                                        <td>---</td>
+                                                    </tr>
+                                                    @endforeach
+    
+                                                    @foreach ($all_payment_loans as $payment_loan)
+                                                    <tr>
+                                                        <td>{{$payment_loan->transaction_date}}</td>
+                                                        <td class="xs-hidden">{{$payment_loan->return_date}}</td>
+                                                        <td>Payment</td>
+                                                        <td>---</td>
+                                                        <td>{{$payment_loan->amount}}</td>
+                                                    </tr>
+                                                    @endforeach
+                                                    @else 
+                                                    <tr>
+                                                        <td colspan="5" align="center">No Transaction are available.</td>
+                                                    </tr>
+                                                    @endif
                                                 </tbody>
                                                 <tfoot>
                                                 <tr></tr>
@@ -221,44 +239,44 @@
         <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-            <h4 class="modal-title modal_popup" id="loanRecModalLabel">Loan Received</h4>
+            <h4 class="modal-title modal_popup" id="loanRecModalLabel">Loan Receive Form</h4>
             </div>
-            <form class="form-horizontal" method="post" action="{{url('/admin/loan/received/insert')}}">
+            <form class="form-horizontal" method="post" action="{{route('lenderLoanTransaction', [1])}}">
             {{csrf_field()}}
             <div class="modal-body">
                 <div class="popup_box_input">
                 <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
-                    <label for="" class="col-sm-3 control-label">Received Amount <span class="req_star">*</span></label>
+                    <label for="amount" class="col-sm-3 control-label">Received Amount <span class="req_star">*</span></label>
                     <div class="col-sm-8">
-                        <input type="hidden" name="loaner" class="form-control pop_input_field" id="" value="{{$lender->loaner_id}}">
-                        <input type="text" name="amount" class="form-control pop_input_field" id="" value="{{old('amount')}}">
+                        <input type="hidden" name="lender_id" class="form-control pop_input_field" id="" value="{{$lender->id}}">
+                        <input type="text" required name="amount" class="form-control pop_input_field" id="amount" value="{{old('amount')}}">
                         <span class="help-block">
                             <strong>{{ $errors->first('amount') }}</strong>
                         </span>
                     </div>
                 </div>
-                <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}">
-                    <label for="" class="col-sm-3 control-label">Received Date<span class="req_star">*</span></label>
+                <div class="form-group{{ $errors->has('transaction_date') ? ' has-error' : '' }}">
+                    <label for="transaction_date" class="col-sm-3 control-label">Received Date<span class="req_star">*</span></label>
                     <div class="col-sm-8">
-                        <input type="text" name="date" class="form-control pop_input_field datepicker_date" id="" value="{{old('date')}}">
+                        <input type="text" required name="transaction_date" class="form-control pop_input_field datepicker_date" id="transaction_date" value="{{old('transaction_date')}}">
                         <span class="help-block">
-                            <strong>{{ $errors->first('date') }}</strong>
+                            <strong>{{ $errors->first('transaction_date') }}</strong>
                         </span>
                     </div>
                 </div>
-                <div class="form-group{{ $errors->has('rep_date') ? ' has-error' : '' }}">
-                    <label for="" class="col-sm-3 control-label">Loan Paid Date<span class="req_star">*</span></label>
+                <div class="form-group{{ $errors->has('return_date') ? ' has-error' : '' }}">
+                    <label for="return_date" class="col-sm-3 control-label">Loan Paid Date<span class="req_star">*</span></label>
                     <div class="col-sm-8">
-                        <input type="text" name="rep_date" class="form-control pop_input_field datepicker_redate" id="" value="{{old('rep_date')}}">
+                        <input type="text" required name="return_date" class="form-control pop_input_field datepicker_redate" id="return_date" value="{{old('return_date')}}">
                         <span class="help-block">
-                            <strong>{{ $errors->first('rep_date') }}</strong>
+                            <strong>{{ $errors->first('return_date') }}</strong>
                         </span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="" class="col-sm-3 control-label">Remarks</label>
+                    <label for="remarks" class="col-sm-3 control-label">Remarks</label>
                     <div class="col-sm-8">
-                        <input type="text" name="remarks" class="form-control pop_input_field" id="" value="{{old('remarks')}}">
+                        <input type="text" name="remarks" class="form-control pop_input_field" id="remarks" value="{{old('remarks')}}">
                     </div>
                 </div>
                 </div>
@@ -276,41 +294,44 @@
         <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-            <h4 class="modal-title modal_popup" id="loanPaidModalLabel">Loan Paid</h4>
+            <h4 class="modal-title modal_popup" id="loanPaidModalLabel">Loan Paid Form</h4>
             </div>
-            <form class="form-horizontal" method="post" action="{{url('/admin/loan/paid/insert')}}">
+            <form class="form-horizontal" method="post" action="{{route('lenderLoanTransaction', [2])}}">
             {{csrf_field()}}
             <div class="modal-body">
                 <div class="popup_box_input">
                 <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
-                    <label for="" class="col-sm-3 control-label">Paid Amount <span class="req_star">*</span></label>
+                    <label for="amount" class="col-sm-3 control-label">Paid Amount <span class="req_star">*</span></label>
                     <div class="col-sm-8">
-                        <input type="hidden" name="loaner" class="form-control pop_input_field" id="" value="{{$lender->loaner_id}}">
-                        <input type="text" name="amount" class="form-control pop_input_field" id="" value="{{old('amount')}}">
+                        <input type="hidden" name="lender_id" class="form-control pop_input_field" id="" value="{{$lender->id}}">
+                        <input type="text" required name="amount" class="form-control pop_input_field" id="amount" value="{{old('amount')}}">
                         <span class="help-block">
                             <strong>{{ $errors->first('amount') }}</strong>
                         </span>
                     </div>
                 </div>
-                <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}">
-                    <label for="" class="col-sm-3 control-label">Paid Date<span class="req_star">*</span></label>
+                <div class="form-group{{ $errors->has('transaction_date') ? ' has-error' : '' }}">
+                    <label for="transaction_date" class="col-sm-3 control-label">Paid Date<span class="req_star">*</span></label>
                     <div class="col-sm-8">
-                        <input type="text" name="date" class="form-control pop_input_field datepicker_date" id="" value="{{old('date')}}">
+                        <input type="text" required name="transaction_date" class="form-control pop_input_field datepicker_date" id="transaction_date" value="{{old('transaction_date')}}">
                         <span class="help-block">
-                            <strong>{{ $errors->first('date') }}</strong>
+                            <strong>{{ $errors->first('transaction_date') }}</strong>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group{{ $errors->has('return_date') ? ' has-error' : '' }}">
+                    <label for="return_date" class="col-sm-3 control-label">Next Paid Date</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="return_date" class="form-control pop_input_field datepicker_redate" id="return_date" value="{{old('return_date')}}">
+                        <span class="help-block">
+                            <strong>{{ $errors->first('return_date') }}</strong>
                         </span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="" class="col-sm-3 control-label">Next Paid Date</label>
+                    <label for="remarks" class="col-sm-3 control-label">Remarks</label>
                     <div class="col-sm-8">
-                        <input type="text" name="rep_date" class="form-control pop_input_field datepicker_redate" id="" value="{{old('rep_date')}}">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="" class="col-sm-3 control-label">Remarks</label>
-                    <div class="col-sm-8">
-                        <input type="text" name="remarks" class="form-control pop_input_field" id="" value="{{old('remarks')}}">
+                        <input type="text" name="remarks" class="form-control pop_input_field" id="remarks" value="{{old('remarks')}}">
                     </div>
                 </div>
                 </div>
@@ -328,41 +349,44 @@
         <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-            <h4 class="modal-title modal_popup" id="loanGivenModalLabel">Loan Given Information</h4>
+            <h4 class="modal-title modal_popup" id="loanGivenModalLabel">Loan Given Form</h4>
             </div>
-            <form class="form-horizontal" method="post" action="{{url('/admin/loan/given/insert')}}">
+            <form class="form-horizontal" method="post" action="{{route('lenderLoanTransaction', [3])}}">
             {{csrf_field()}}
             <div class="modal-body">
                 <div class="popup_box_input">
                 <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
-                    <label for="" class="col-sm-3 control-label">Given Amount <span class="req_star">*</span></label>
+                    <label for="amount" class="col-sm-3 control-label">Given Amount <span class="req_star">*</span></label>
                     <div class="col-sm-8">
-                        <input type="hidden" name="loaner" class="form-control pop_input_field" id="" value="{{$lender->loaner_id}}">
-                        <input type="text" name="amount" class="form-control pop_input_field" id="" value="{{old('amount')}}">
+                        <input type="hidden" name="lender_id" class="form-control pop_input_field" id="" value="{{$lender->id}}">
+                        <input type="text" required name="amount" class="form-control pop_input_field" id="amount" value="{{old('amount')}}">
                         <span class="help-block">
                             <strong>{{ $errors->first('amount') }}</strong>
                         </span>
                     </div>
                 </div>
-                <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}">
-                    <label for="" class="col-sm-3 control-label">Given Date <span class="req_star">*</span></label>
+                <div class="form-group{{ $errors->has('transaction_date') ? ' has-error' : '' }}">
+                    <label for="transaction_date" class="col-sm-3 control-label">Given Date<span class="req_star">*</span></label>
                     <div class="col-sm-8">
-                        <input type="text" name="date" class="form-control pop_input_field datepicker_date" id="" value="{{old('date')}}">
+                        <input type="text" required name="transaction_date" class="form-control pop_input_field datepicker_date" id="transaction_date" value="{{old('transaction_date')}}">
                         <span class="help-block">
-                            <strong>{{ $errors->first('date') }}</strong>
+                            <strong>{{ $errors->first('transaction_date') }}</strong>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group{{ $errors->has('return_date') ? ' has-error' : '' }}">
+                    <label for="return_date" class="col-sm-3 control-label">Payment Date<span class="req_star">*</span></label>
+                    <div class="col-sm-8">
+                        <input type="text" required name="return_date" class="form-control pop_input_field datepicker_redate" id="return_date" value="{{old('return_date')}}">
+                        <span class="help-block">
+                            <strong>{{ $errors->first('return_date') }}</strong>
                         </span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="" class="col-sm-3 control-label">Payment Date <span class="req_star">*</span></label>
+                    <label for="remarks" class="col-sm-3 control-label">Remarks</label>
                     <div class="col-sm-8">
-                        <input type="text" name="rep_date" class="form-control pop_input_field datepicker_redate" id="" value="{{old('rep_date')}}">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="" class="col-sm-3 control-label">Remarks</label>
-                    <div class="col-sm-8">
-                        <input type="text" name="remarks" class="form-control pop_input_field" id="" value="{{old('remarks')}}">
+                        <input type="text" name="remarks" class="form-control pop_input_field" id="remarks" value="{{old('remarks')}}">
                     </div>
                 </div>
                 </div>
@@ -380,41 +404,44 @@
         <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-            <h4 class="modal-title modal_popup" id="loanPaymentModalLabel">Loan Payment Information</h4>
+            <h4 class="modal-title modal_popup" id="loanPaymentModalLabel">Loan Payment Form</h4>
             </div>
-            <form class="form-horizontal" method="post" action="{{url('/admin/loan/payment/insert')}}">
+            <form class="form-horizontal" method="post" action="{{route('lenderLoanTransaction', [4])}}">
             {{csrf_field()}}
             <div class="modal-body">
                 <div class="popup_box_input">
                 <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
-                    <label for="" class="col-sm-3 control-label">Payment Amount <span class="req_star">*</span></label>
+                    <label for="amount" class="col-sm-3 control-label">Payment Amount <span class="req_star">*</span></label>
                     <div class="col-sm-8">
-                        <input type="hidden" name="loaner" class="form-control pop_input_field" id="" value="{{$lender->loaner_id}}">
-                        <input type="text" name="amount" class="form-control pop_input_field" id="" value="{{old('amount')}}">
+                        <input type="hidden" name="lender_id" class="form-control pop_input_field" id="" value="{{$lender->id}}">
+                        <input type="text" required name="amount" class="form-control pop_input_field" id="amount" value="{{old('amount')}}">
                         <span class="help-block">
                             <strong>{{ $errors->first('amount') }}</strong>
                         </span>
                     </div>
                 </div>
-                <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}">
-                    <label for="" class="col-sm-3 control-label">Payment Date <span class="req_star">*</span></label>
+                <div class="form-group{{ $errors->has('transaction_date') ? ' has-error' : '' }}">
+                    <label for="transaction_date" class="col-sm-3 control-label">Payment Date<span class="req_star">*</span></label>
                     <div class="col-sm-8">
-                        <input type="text" name="date" class="form-control pop_input_field datepicker_date" id="" value="{{old('date')}}">
+                        <input type="text" required name="transaction_date" class="form-control pop_input_field datepicker_date" id="transaction_date" value="{{old('transaction_date')}}">
                         <span class="help-block">
-                            <strong>{{ $errors->first('date') }}</strong>
+                            <strong>{{ $errors->first('transaction_date') }}</strong>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group{{ $errors->has('return_date') ? ' has-error' : '' }}">
+                    <label for="return_date" class="col-sm-3 control-label">Next Payment Date<span class="req_star">*</span></label>
+                    <div class="col-sm-8">
+                        <input type="text" name="return_date" class="form-control pop_input_field datepicker_redate" id="return_date" value="{{old('return_date')}}">
+                        <span class="help-block">
+                            <strong>{{ $errors->first('return_date') }}</strong>
                         </span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="" class="col-sm-3 control-label">Next Payment Date </label>
+                    <label for="remarks" class="col-sm-3 control-label">Remarks</label>
                     <div class="col-sm-8">
-                        <input type="text" name="rep_date" class="form-control pop_input_field datepicker_redate" id="" value="{{old('rep_date')}}">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="" class="col-sm-3 control-label">Remarks</label>
-                    <div class="col-sm-8">
-                        <input type="text" name="remarks" class="form-control pop_input_field" id="" value="{{old('remarks')}}">
+                        <input type="text" name="remarks" class="form-control pop_input_field" id="remarks" value="{{old('remarks')}}">
                     </div>
                 </div>
                 </div>

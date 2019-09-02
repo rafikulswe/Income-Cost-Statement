@@ -3,15 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
-use App\Income;
-use App\Lender;
-use App\IncomeCategory;
 use Auth;
 use Validator;
 use DB;
 use DateTime;
 use Session;
+use App\User;
+use App\Lender;
+use App\Loan;
 
 class LenderInfoController extends Controller
 {
@@ -83,7 +82,31 @@ class LenderInfoController extends Controller
      */
     public function show($id)
     {
+        $user_id = Auth::user()->id;
         $data['lender'] = Lender::find($id);
+        $data['all_received_loans'] = Loan::where('valid', 1)
+                ->where('user_id', $user_id)
+                ->where('loan_type', 1) //1 = Received Loan
+                ->orderBy('id', 'DESC')
+                ->get();
+
+        $data['all_paid_loans'] = Loan::where('valid', 1)
+                ->where('user_id', $user_id)
+                ->where('loan_type', 2) //2 = Paid Loan
+                ->orderBy('id', 'DESC')
+                ->get();
+
+        $data['all_given_loans'] = Loan::where('valid', 1)
+                ->where('user_id', $user_id)
+                ->where('loan_type', 3) //3 = Given Loan
+                ->orderBy('id', 'DESC')
+                ->get();
+
+        $data['all_payment_loans'] = Loan::where('valid', 1)
+                ->where('user_id', $user_id)
+                ->where('loan_type', 4) //4 = Payment Loan
+                ->orderBy('id', 'DESC')
+                ->get();
         return view('web.lenderInfo.view', $data);
     }
 
@@ -144,6 +167,48 @@ class LenderInfoController extends Controller
         }else{
             Session::flash('error','value');
             return redirect()->route('lender')->with('message', 'Lender has not been Deleted');
+        }
+    }
+
+    public function loanTransaction(Request $request)
+    {
+        $input = $request->all();
+        $user_id = Auth::user()->id;
+        $lender_id = $request->lender_id;
+        $modalType = $request->modalType;
+
+        $validator = Validator::make($input, [
+            'amount'           => 'required',
+            'transaction_date' => 'required',
+            'return_date'      => 'required'
+        ]);
+        if ($modalType == 1 || $modalType == 3) {
+            $paid_status = 0;
+        } else {
+            $paid_status = 1;
+        }
+        if ($validator->passes()) {
+            Loan::create([
+                "lender_id"        => $lender_id,
+                "amount"           => $request->amount,
+                "transaction_date" => $request->transaction_date,
+                "return_date"      => $request->return_date,
+                "remarks"          => $request->remarks,
+                "loan_type"        => $modalType, //1 = Loan Receive, 2 = Loan Paid, 3 = Loan Given, 4 = Loan Payment
+                "paid_status"      => $paid_status, //0 = No, 1 = Yes
+                "user_id"          => $user_id
+            ]);
+            if ($modalType == 1) {
+                return redirect()->route('lender.show', [$lender_id])->with('message', 'Loan has been Received');
+            } elseif ($modalType == 2) {
+                return redirect()->route('lender.show', [$lender_id])->with('message', 'Loan has been Paid');
+            } elseif ($modalType == 3) {
+                return redirect()->route('lender.show', [$lender_id])->with('message', 'Loan has been Given');
+            } else {
+                return redirect()->route('lender.show', [$lender_id])->with('message', 'Loan has been Payment');
+            }
+        } else {
+            return redirect()->route('lender.show', [$lender_id])->with('error', 'Please fill up the required field');
         }
     }
 }

@@ -45,6 +45,7 @@ Route::get('expense', array('access' => ['resource|expense.index'], 'as' => 'exp
 // Lender (Resource)
 Route::resource('lender', 'LenderInfoController');
 Route::get('lender', array('access' => ['resource|lender.index'], 'as' => 'lender', 'uses' => 'LenderInfoController@index'));
+Route::post('lender-loan-transaction/{modalType}', array('access' => ['resource|lender.edit'], 'as' => 'lenderLoanTransaction', 'uses' => 'LenderInfoController@loanTransaction'));
 
 Route::prefix('admin')->group(function() {
 	Route::get('/','softAdmin\LoginController@showLoginForm')->name('admin.login');
