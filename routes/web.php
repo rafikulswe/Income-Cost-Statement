@@ -17,20 +17,22 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('home', 'HomeController@index')->name('home');
-Route::get('dashboard', 'HomeController@dashboard')->name('dashboard');
-
 //Profile
 Route::get('/profile', 'ProfileController@index')->name('profile');
 
-// Income (Resource)
-Route::resource('income', 'IncomeController');
-Route::get('income', array('access' => ['resource|income.index'], 'as' => 'income', 'uses' => 'IncomeController@index'));
+Route::get('home', 'HomeController@index')->name('home');
+Route::get('dashboard', 'HomeController@dashboard')->name('dashboard');
 
+// Manage
+Route::get('/manage', 'ManageController@index')->name('manage');
 
 // Income Category (Resource)
 Route::resource('incomeCategory', 'IncomeCategoryController');
 Route::get('incomeCategory', array('access' => ['resource|incomeCategory.index'], 'as' => 'incomeCategory', 'uses' => 'IncomeCategoryController@index'));
+
+// Income (Resource)
+Route::resource('income', 'IncomeController');
+Route::get('income', array('access' => ['resource|income.index'], 'as' => 'income', 'uses' => 'IncomeController@index'));
 
 // Expense Category (Resource)
 Route::resource('expenseCategory', 'ExpenseCategoryController');
@@ -40,8 +42,9 @@ Route::get('expenseCategory', array('access' => ['resource|expenseCategory.index
 Route::resource('expense', 'ExpenseController');
 Route::get('expense', array('access' => ['resource|expense.index'], 'as' => 'expense', 'uses' => 'ExpenseController@index'));
 
-// Manage
-Route::get('/manage', 'ManageController@index')->name('manage');
+// Lender (Resource)
+Route::resource('lender', 'LenderInfoController');
+Route::get('lender', array('access' => ['resource|lender.index'], 'as' => 'lender', 'uses' => 'LenderInfoController@index'));
 
 Route::prefix('admin')->group(function() {
 	Route::get('/','softAdmin\LoginController@showLoginForm')->name('admin.login');

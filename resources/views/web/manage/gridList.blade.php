@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="col-xs-7">
                                     <div class="manage_text_part">
-                                        <p>Loaner</p>
+                                        <p>Lenders</p>
                                         @if(@$loaner<10)
                                             0{{@$loaner}}
                                         @else
@@ -53,7 +53,7 @@
                             <div class="footer">
                                 <hr />
                                 <div class="stats">
-                                    <a href="{{url('/admin/loaner')}}"><i class="fa fa-share-square fa-lg"></i> Manage Loaner</a>
+                                    <a href="{{route('lender')}}"><i class="fa fa-share-square fa-lg"></i> Manage Lender</a>
                                 </div>
                             </div>
                         </div>

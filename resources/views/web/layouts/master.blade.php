@@ -66,6 +66,12 @@ $page=($page=='home')?'home':$page;
                                 <p>Expense</p>
                             </a>
                         </li>
+                        <li @if($page=="lender") class="active" @endif>
+                            <a href="{{route('lender')}}">
+                                <i class="fa fa-address-book-o"></i>
+                                <p>Loan Information</p>
+                            </a>
+                        </li>
                         <li>
                             <a href="{{url('/admin/summary')}}">
                                 <i class="fa fa-gg-circle"></i>
@@ -73,12 +79,6 @@ $page=($page=='home')?'home':$page;
                             </a>
                         </li>
                         
-                        <li>
-                            <a href="{{url('/admin/loan')}}">
-                                <i class="fa fa-address-book-o"></i>
-                                <p>Loan Information</p>
-                            </a>
-                        </li>
                         <li class="">
                             <a href="#">
                                 <i class="fa fa-cloud"></i>
@@ -113,8 +113,9 @@ $page=($page=='home')?'home':$page;
                                 <span class="icon-bar bar2"></span>
                                 <span class="icon-bar bar3"></span>
                             </button>
-                            <a class="navbar-brand" href="@if($page=="home"){{route('home')}} @elseif($page=="dashboard"){{route('dashboard')}} @endif">
-                                @if($page=="home")Welcome @elseif($page=="dashboard")Dashboard @elseif($page=="income") Income @elseif($page=="manage") Manage @elseif($page=="incomeCategory") Income Category @elseif($page=="expense") Expense @endif
+                            <a class="navbar-brand" href="@if($page=="home"){{route('home')}} @elseif($page=="dashboard"){{route('dashboard')}} @elseif($page=="income"){{route('income')}} @elseif($page=="manage"){{route('manage')}} @elseif($page=="incomeCategory"){{route('incomeCategory')}} @elseif($page=="expense"){{route('expense')}} @endif">
+
+                                @if($page=="home")Welcome @elseif($page=="dashboard")Dashboard @elseif($page=="income") Income @elseif($page=="manage") Manage @elseif($page=="incomeCategory") Income Category @elseif($page=="expense") Expense @elseif($page=="lender") Lender @endif
                             </a>
                         </div>
                         <div class="collapse navbar-collapse">
@@ -139,7 +140,7 @@ $page=($page=='home')?'home':$page;
                 <ul class="breadcrumb">
                     <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
                     <li>
-                        @if($page=="home")Welcome @elseif($page=="dashboard")Dashboard @elseif($page=="income") Income @elseif($page=="manage") Manage @elseif($page=="incomeCategory") Income Category @elseif($page=="expense") Expense @endif
+                        @if($page=="home")Welcome @elseif($page=="dashboard")Dashboard @elseif($page=="income") Income @elseif($page=="manage") Manage @elseif($page=="incomeCategory") Income Category @elseif($page=="expense") Expense @elseif($page=="lender") Lender @endif
                     </li>
                 </ul>
 
