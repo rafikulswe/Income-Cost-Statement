@@ -27,10 +27,39 @@ class LenderInfoController extends Controller
     public function index()
     {
         $user_id = Auth::user()->id;
-        $data['all_lenders'] = Lender::where('valid', 1)
+        $data['all_lenders'] = $all_lenders = Lender::where('valid', 1)
                 ->where('user_id', $user_id)
                 ->orderBy('id', 'DESC')
                 ->get();
+        foreach ($all_lenders as $key => $lender) {
+            $all_received_loans = Loan::where('valid', 1)
+                    ->where('user_id', $user_id)
+                    ->where('lender_id', $lender->id)
+                    ->where('loan_type', 1) //1 = Received Loan
+                    ->sum('amount');
+
+            $all_paid_loans = Loan::where('valid', 1)
+                    ->where('user_id', $user_id)
+                    ->where('lender_id', $lender->id)
+                    ->where('loan_type', 2) //2 = Paid Loan
+                    ->sum('amount');
+
+            $all_given_loans = Loan::where('valid', 1)
+                    ->where('user_id', $user_id)
+                    ->where('lender_id', $lender->id)
+                    ->where('loan_type', 3) //3 = Given Loan
+                    ->sum('amount');
+
+            $all_payment_loans = Loan::where('valid', 1)
+                    ->where('user_id', $user_id)
+                    ->where('lender_id', $lender->id)
+                    ->where('loan_type', 4) //4 = Payment Loan
+                    ->sum('amount');
+            
+            $total_received_amount = $all_received_loans + $all_payment_loans;
+            $total_payment_amount = $all_paid_loans + $all_given_loans;
+            $lender->total_due_amount = $total_received_amount - $total_payment_amount;
+        }
         return view('web.lenderInfo.dataList', $data);
     }
 
