@@ -128,34 +128,38 @@
                                             </thead>
                                             <tbody>
                                                 @if (count($all_received_loans) > 0 || count($all_paid_loans) > 0)
+                                                <?php $total_credit_amount = 0; ?>
                                                 @foreach ($all_received_loans as $received_loan)
                                                 <tr>
                                                     <td>{{$received_loan->transaction_date}}</td>
                                                     <td class="xs-hidden">{{$received_loan->return_date}}</td>
                                                     <td>Received</td>
-                                                    <td>{{$received_loan->amount}}</td>
+                                                    <td align="right">{{$received_loan->amount}}</td>
                                                     <td>---</td>
                                                 </tr>
+                                                <?php $total_credit_amount += $received_loan->amount; ?>
                                                 @endforeach
 
                                                 @foreach ($all_paid_loans as $paid_loan)
+                                                <?php $total_debit_amount = 0; ?>
                                                 <tr>
                                                     <td>{{$paid_loan->transaction_date}}</td>
                                                     <td class="xs-hidden">{{$paid_loan->return_date}}</td>
                                                     <td>Paid</td>
                                                     <td>---</td>
-                                                    <td>{{$paid_loan->amount}}</td>
+                                                    <td align="right">{{$paid_loan->amount}}</td>
                                                 </tr>
+                                                <?php $total_debit_amount += $paid_loan->amount; ?>
                                                 @endforeach
-                                                @else 
-                                                <tr>
-                                                    <td colspan="5" align="center">No Transaction are available.</td>
-                                                </tr>
-                                                @endif
                                             </tbody>
                                             <tfoot>
-                                            <tr></tr>
+                                                <tr>
+                                                    <th colspan="3" style="text-align:right;">Total:</th>
+                                                    <th colspan="1" style="text-align:right;">৳ {{@$total_credit_amount}}</th>
+                                                    <th colspan="1" style="text-align:right;">৳ {{@$total_debit_amount}}</th>
+                                                </tr>
                                             </tfoot>
+                                            @endif
                                         </table>
                                         <a href="#" class="btn btn-sm btn-fill btnu btn-primary" data-toggle="modal" data-target=".loan_received_part">Loan Received</a>
                                         <a href="#" class="btn btn-sm btn-fill btnu btn-info" data-toggle="modal" data-target=".loan_paid_part">Loan Paid</a>
@@ -190,6 +194,7 @@
                                                 </thead>
                                                 <tbody>
                                                     @if (count($all_given_loans) > 0 || count($all_payment_loans) > 0)
+                                                    <?php $total_given_credit_amount = 0; ?>
                                                     @foreach ($all_given_loans as $given_loan)
                                                     <tr>
                                                         <td>{{$given_loan->transaction_date}}</td>
@@ -198,9 +203,11 @@
                                                         <td>{{$given_loan->amount}}</td>
                                                         <td>---</td>
                                                     </tr>
+                                                    <?php $total_given_credit_amount += $given_loan->amount; ?>
                                                     @endforeach
     
                                                     @foreach ($all_payment_loans as $payment_loan)
+                                                    <?php $total_payment_credit_amount = 0; ?>
                                                     <tr>
                                                         <td>{{$payment_loan->transaction_date}}</td>
                                                         <td class="xs-hidden">{{$payment_loan->return_date}}</td>
@@ -208,16 +215,24 @@
                                                         <td>---</td>
                                                         <td>{{$payment_loan->amount}}</td>
                                                     </tr>
+                                                    <?php $total_payment_credit_amount += $payment_loan->amount; ?>
                                                     @endforeach
-                                                    @else 
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th colspan="3" style="text-align:right;">Total:</th>
+                                                        <th colspan="1" style="text-align:right;">৳ {{@$total_given_credit_amount}}</th>
+                                                        <th colspan="1" style="text-align:right;">৳ {{@$total_payment_credit_amount}}</th>
+                                                    </tr>
+                                                </tfoot>
+                                                @else 
+                                                <tbody>
                                                     <tr>
                                                         <td colspan="5" align="center">No Transaction are available.</td>
                                                     </tr>
-                                                    @endif
                                                 </tbody>
-                                                <tfoot>
-                                                <tr></tr>
-                                                </tfoot>
+                                                @endif
+                                                
                                             </table>
                                         <a href="#" class="btn btn-sm btn-fill btnu btn-success" data-toggle="modal" data-target=".loan_given_part">Loan Given</a>
                                         <a href="#" class="btn btn-sm btn-fill btnu btn-default" data-toggle="modal" data-target=".loan_payment_part">Loan Payment</a>
