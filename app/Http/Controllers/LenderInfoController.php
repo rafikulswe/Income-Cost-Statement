@@ -84,29 +84,38 @@ class LenderInfoController extends Controller
     {
         $user_id = Auth::user()->id;
         $data['lender'] = Lender::find($id);
-        $data['all_received_loans'] = Loan::where('valid', 1)
+        
+        $data['all_received_loans'] = $all_received_loans = Loan::where('valid', 1)
                 ->where('user_id', $user_id)
+                ->where('lender_id', $id)
                 ->where('loan_type', 1) //1 = Received Loan
-                ->orderBy('id', 'DESC')
+                ->orderBy('id', 'ASC')
                 ->get();
 
-        $data['all_paid_loans'] = Loan::where('valid', 1)
+        $data['all_paid_loans'] = $all_paid_loans = Loan::where('valid', 1)
                 ->where('user_id', $user_id)
+                ->where('lender_id', $id)
                 ->where('loan_type', 2) //2 = Paid Loan
-                ->orderBy('id', 'DESC')
+                ->orderBy('id', 'ASC')
                 ->get();
 
-        $data['all_given_loans'] = Loan::where('valid', 1)
+        $data['all_given_loans'] = $all_given_loans = Loan::where('valid', 1)
                 ->where('user_id', $user_id)
+                ->where('lender_id', $id)
                 ->where('loan_type', 3) //3 = Given Loan
-                ->orderBy('id', 'DESC')
+                ->orderBy('id', 'ASC')
                 ->get();
 
-        $data['all_payment_loans'] = Loan::where('valid', 1)
+        $data['all_payment_loans'] = $all_payment_loans = Loan::where('valid', 1)
                 ->where('user_id', $user_id)
+                ->where('lender_id', $id)
                 ->where('loan_type', 4) //4 = Payment Loan
-                ->orderBy('id', 'DESC')
+                ->orderBy('id', 'ASC')
                 ->get();
+        
+        $data['total_received_amount'] = $total_received_amount = $all_received_loans->sum('amount') + $all_payment_loans->sum('amount');
+        $data['total_payment_amount'] = $total_payment_amount = $all_paid_loans->sum('amount') + $all_given_loans->sum('amount');
+        $data['total_due_amount'] = $total_received_amount - $total_payment_amount;
         return view('web.lenderInfo.view', $data);
     }
 

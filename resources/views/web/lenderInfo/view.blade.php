@@ -60,26 +60,39 @@
                                             <th colspan="3"><i class="fa fa-gg-circle"></i> Payment Information</th>
                                         </tr>
                                         <tr>
-                                            <td>Total Payment Amount</td>
-                                            <td>:</td>
-                                            <td>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
                                             <td>Total Received Amount</td>
                                             <td>:</td>
                                             <td>
-
+                                                @if(@$total_received_amount > 0)
+                                                ৳ {{@$total_received_amount}}/=  
+                                                @else 
+                                                ৳ {{@$total_received_amount}}/=  
+                                                @endif
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td>Total Payment Amount</td>
+                                            <td>:</td>
+                                            <td>
+                                                @if(@$total_payment_amount > 0)
+                                                ৳ {{@$total_payment_amount}}/=  
+                                                @else 
+                                                ৳ {{@$total_payment_amount}}/=  
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        
                                         <tr>
                                             <td>Total Payable/ Total Due</td>
                                             <td>:</td>
-                                            <td>
+                                            <td>@if(@$total_due_amount > 0)
+                                                ৳ {{@$total_due_amount}}/=  (I have to pay)
+                                                @else 
+                                                ৳ {{@$total_due_amount}}/=  (He/She have to pay)
+                                                @endif
                                             </td>
                                         </tr>
-                                        <tr>
+                                        {{-- <tr>
                                             <td>Last Payment Date</td>
                                             <td>:</td>
                                             <td>
@@ -90,7 +103,7 @@
                                             <td>:</td>
                                             <td>
                                             </td>
-                                        </tr>
+                                        </tr> --}}
                                     </table>
                                     
                                 </div>
@@ -98,19 +111,19 @@
                             </div>
                             <div class="panel-body">
                                 <div class="row">
+                                    @if(Session::has('message'))
+                                    <div class="alert alert-success alert-dismissible" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <strong>Success!</strong> {{Session::get('message')}}
+                                    </div>
+                                    @endif
+                                    @if(Session::has('error'))
+                                    <div class="alert alert-danger alert-dismissible" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <strong>Error!</strong> {{Session::get('error')}}
+                                    </div>
+                                    @endif
                                     <div class="col-md-6">
-                                        @if(Session::has('message'))
-                                        <div class="alert alert-success alert-dismissible" role="alert">
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <strong>Success!</strong> {{Session::get('message')}}
-                                        </div>
-                                        @endif
-                                        @if(Session::has('error'))
-                                        <div class="alert alert-danger alert-dismissible" role="alert">
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <strong>Error!</strong> {{Session::get('error')}}
-                                        </div>
-                                        @endif
                                         <table id="" class="table table-striped table-bordered details_table">
                                             <tr>
                                                 <th colspan="7"><i class="fa fa-gg-circle"></i> Payment Status (Taken Loan)</th>
@@ -165,18 +178,6 @@
                                         <a href="#" class="btn btn-sm btn-fill btnu btn-info" data-toggle="modal" data-target=".loan_paid_part">Loan Paid</a>
                                     </div>
                                     <div class="col-md-6">
-                                        @if(Session::has('message'))
-                                        <div class="alert alert-success alert-dismissible" role="alert">
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <strong>Success!</strong> {{Session::get('message')}}
-                                        </div>
-                                        @endif
-                                        @if(Session::has('error'))
-                                        <div class="alert alert-danger alert-dismissible" role="alert">
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <strong>Error!</strong> {{Session::get('error')}}
-                                        </div>
-                                        @endif
                                         <table id="" class="table table-striped table-bordered details_table">
                                             <tr>
                                                 <th colspan="7"><i class="fa fa-gg-circle"></i> Payment Status (Given Loan)</th>
@@ -242,6 +243,7 @@
                             <div class="panel-footer">
                                 <a href="#" class="btn btn-sm btn-fill btnu btn-primary">Excel</a>
                                 <a href="#" class="btn btn-sm btn-fill btnu btn-warning">PDF</a>
+                                <a href="{{route('lender')}}" class="btn btn-sm btn-default btnu">Back to Lender List</a>
                             </div>
                         </div>
                     </div>

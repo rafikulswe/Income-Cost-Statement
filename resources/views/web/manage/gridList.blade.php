@@ -129,14 +129,14 @@
                                 <div class="col-xs-7">
                                     <div class="manage_text_part">
                                         <p>Total Loan Received</p>
-                                        {{@$totalRec}}
+                                        ৳ {{@$total_received_amount}}
                                     </div>
                                 </div>
                             </div>
                             <div class="footer">
                                 <hr />
                                 <div class="stats">
-                                    <a href="{{url('/admin/loan/received')}}"><i class="fa fa-share-square fa-lg"></i> Manage Loan Received</a>
+                                    <a href="{{route('lender')}}"><i class="fa fa-share-square fa-lg"></i> Manage Loan Received</a>
                                 </div>
                             </div>
                         </div>
@@ -154,14 +154,14 @@
                                 <div class="col-xs-7">
                                     <div class="manage_text_part">
                                         <p>Total Loan Paid</p>
-                                        {{@$totalPaid}}
+                                        ৳ {{@$total_payment_amount}}
                                     </div>
                                 </div>
                             </div>
                             <div class="footer">
                                 <hr />
                                 <div class="stats">
-                                    <a href="{{url('/admin/loan/paid')}}"><i class="fa fa-share-square fa-lg"></i> Manage Loan Paid</a>
+                                    <a href="{{route('lender')}}"><i class="fa fa-share-square fa-lg"></i> Manage Loan Paid</a>
                                 </div>
                             </div>
                         </div>
@@ -178,21 +178,21 @@
                                 </div>
                                 <div class="col-xs-7">
                                     <div class="manage_text_part">
-                                        <p>Total Loan Given</p>
-                                        {{@$totalGiven}}
+                                        <p>Total Loan Due</p>
+                                        ৳ {{@$total_due_amount}}
                                     </div>
                                 </div>
                             </div>
                             <div class="footer">
                                 <hr />
                                 <div class="stats">
-                                    <a href="{{url('/admin/loan/given')}}"><i class="fa fa-share-square fa-lg"></i> Manage Loan Given</a>
+                                    <a href="{{route('lender')}}"><i class="fa fa-share-square fa-lg"></i> Manage Loan Due</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6">
+                {{-- <div class="col-lg-3 col-sm-6">
                     <div class="card">
                         <div class="content">
                             <div class="row">
@@ -316,7 +316,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
