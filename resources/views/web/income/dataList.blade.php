@@ -77,6 +77,10 @@
                             <div class="panel-footer">
                                 <a href="#" class="btn btn-sm btn-fill btnu btn-primary">Excel</a>
                                 <a href="#" class="btn btn-sm btn-fill btnu btn-warning">PDF</a>
+                                @php
+                                    $previous_url = $_SERVER['HTTP_REFERER'];
+                                @endphp
+                                <a href="{{url($previous_url)}}" class="btn btn-sm btn-fill btn-default btnu">Back to Previous</a>
                             </div>
                         </div>
                     </div>

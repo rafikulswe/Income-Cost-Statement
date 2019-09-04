@@ -49,6 +49,9 @@
                                                     <strong>{{ $errors->first('income_category_id') }}</strong>
                                                 </span>
                                             </div>
+                                            <div class="col-sm-2">
+                                                <a href="{{route('incomeCategory.create')}}" class="btn btn-sm btn-fill btnu btn-primary">Add Category</a>
+                                            </div>
                                         </div>
                                         <div class="form-group{{ $errors->has('income_name') ? ' has-error' : '' }}">
                                             <label for="income_name" class="col-sm-3 control-label">Income Name <span class="req_star">*</span></label>

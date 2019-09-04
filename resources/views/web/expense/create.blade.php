@@ -49,6 +49,9 @@
                                                     <strong>{{ $errors->first('expense_category_id') }}</strong>
                                                 </span>
                                             </div>
+                                            <div class="col-sm-2">
+                                                <a href="{{route('expenseCategory.create')}}" class="btn btn-sm btn-fill btnu btn-primary">Add Category</a>
+                                            </div>
                                         </div>
                                         <div class="form-group{{ $errors->has('expense_name') ? ' has-error' : '' }}">
                                             <label for="expense_name" class="col-sm-3 control-label">Expense Name <span class="req_star">*</span></label>
@@ -69,7 +72,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group{{ $errors->has('expense_date') ? ' has-error' : '' }}">
-                                            <label for="expense_date" class="col-sm-3 control-label">Income Date <span class="req_star">*</span></label>
+                                            <label for="expense_date" class="col-sm-3 control-label">Expense Date <span class="req_star">*</span></label>
                                             <div class="col-sm-6">
                                                 <input type="text" name="expense_date" class="form-control input_field pick_date" id="expense_date" value="{{old('expense_date')}}">
                                                 <span class="help-block">

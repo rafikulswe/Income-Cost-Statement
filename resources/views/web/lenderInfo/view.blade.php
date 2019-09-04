@@ -243,7 +243,7 @@
                             <div class="panel-footer">
                                 <a href="#" class="btn btn-sm btn-fill btnu btn-primary">Excel</a>
                                 <a href="#" class="btn btn-sm btn-fill btnu btn-warning">PDF</a>
-                                <a href="{{route('lender')}}" class="btn btn-sm btn-default btnu">Back to Lender List</a>
+                                <a href="{{route('lender')}}" class="btn btn-sm btn-fill btn-default btnu">Back to Lender List</a>
                             </div>
                         </div>
                     </div>

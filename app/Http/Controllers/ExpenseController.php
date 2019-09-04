@@ -68,12 +68,12 @@ class ExpenseController extends Controller
             'expense_date'        => 'required'
         ]);
 
-        $totalIncome = Income::where('valid',1)->where('user_id', $user_id)->sum('income_amount');
-        $totalExpense = Expense::where('valid',1)->where('user_id', $user_id)->sum('expense_amount');
+        $totalIncome = Income::where('valid', 1)->where('user_id', $user_id)->sum('income_amount');
+        $totalExpense = Expense::where('valid', 1)->where('user_id', $user_id)->sum('expense_amount');
         $saving_amount = $totalIncome - $totalExpense;
 
         if ($validator->passes()) {
-            if ($saving_amount < 0 && $saving_amount >= $expense_amount) {
+            if ($saving_amount > 0 && $saving_amount >= $expense_amount) {
                 Expense::create([
                     "expense_category_id" => $request->expense_category_id,
                     "expense_name"        => $request->expense_name,

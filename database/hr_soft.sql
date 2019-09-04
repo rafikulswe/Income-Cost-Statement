@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 28, 2019 at 10:22 PM
+-- Generation Time: Sep 04, 2019 at 09:15 PM
 -- Server version: 10.1.22-MariaDB
 -- PHP Version: 7.1.4
 
@@ -49,70 +49,6 @@ INSERT INTO `admins` (`id`, `name`, `email`, `email_verified_at`, `password`, `r
 -- --------------------------------------------------------
 
 --
--- Table structure for table `daily_attendances`
---
-
-CREATE TABLE `daily_attendances` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `employee_id` int(11) NOT NULL,
-  `attend_date` date NOT NULL,
-  `start_time` time NOT NULL,
-  `end_time` time NOT NULL,
-  `late_duration` time NOT NULL,
-  `user_type` tinyint(4) NOT NULL COMMENT '1=Supervisor, 2=Employee',
-  `approval_status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0=Pending, 1=Approved',
-  `approve_remarks` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `approved_by` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `valid` tinyint(4) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `daily_attendances`
---
-
-INSERT INTO `daily_attendances` (`id`, `employee_id`, `attend_date`, `start_time`, `end_time`, `late_duration`, `user_type`, `approval_status`, `approve_remarks`, `approved_by`, `created_at`, `updated_at`, `valid`) VALUES
-(1, 1, '2019-04-07', '10:00:00', '17:00:00', '00:00:00', 1, 0, NULL, NULL, '2019-05-01 00:14:48', '2019-05-01 00:14:48', 1),
-(2, 1, '2019-04-13', '11:30:00', '17:00:00', '00:02:30', 1, 0, NULL, NULL, '2019-05-01 11:35:45', '2019-05-01 11:35:45', 1),
-(3, 1, '2019-04-14', '08:30:00', '14:00:00', '00:00:00', 1, 0, NULL, NULL, '2019-05-01 11:41:12', '2019-05-01 11:41:12', 1),
-(4, 2, '2019-05-04', '09:00:00', '17:00:00', '00:00:30', 1, 0, NULL, NULL, '2019-05-01 12:07:41', '2019-05-01 12:07:41', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `employee_attendance_activities`
---
-
-CREATE TABLE `employee_attendance_activities` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `attendance_id` int(11) DEFAULT NULL COMMENT 'attendance.id',
-  `semister_id` int(11) DEFAULT NULL COMMENT 'semister.id',
-  `employee_id` int(11) NOT NULL,
-  `attend_date` date DEFAULT NULL,
-  `user_type` tinyint(4) NOT NULL,
-  `assign_advisor_id` int(11) DEFAULT NULL,
-  `seen_status` tinyint(4) NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `employee_attendance_activities`
---
-
-INSERT INTO `employee_attendance_activities` (`id`, `attendance_id`, `semister_id`, `employee_id`, `attend_date`, `user_type`, `assign_advisor_id`, `seen_status`, `created_at`, `updated_at`) VALUES
-(1, NULL, 1, 1, NULL, 1, 0, 0, '2019-04-26 13:25:37', '2019-04-26 13:25:37'),
-(2, NULL, 2, 1, NULL, 1, 0, 0, '2019-04-26 13:46:10', '2019-04-26 13:46:10'),
-(3, 1, NULL, 1, '2019-04-06', 1, 0, 0, '2019-05-01 00:14:48', '2019-05-01 00:14:48'),
-(4, 2, NULL, 1, '2019-04-13', 1, 0, 0, '2019-05-01 11:35:45', '2019-05-01 11:35:45'),
-(5, 3, NULL, 1, '2019-04-14', 1, 0, 0, '2019-05-01 11:41:12', '2019-05-01 11:41:12'),
-(6, NULL, 3, 2, NULL, 1, 0, 0, '2019-05-01 12:06:32', '2019-05-01 12:06:32'),
-(7, 4, NULL, 2, '2019-05-04', 1, 0, 0, '2019-05-01 12:07:41', '2019-05-01 12:07:41');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `employee_departments`
 --
 
@@ -124,13 +60,6 @@ CREATE TABLE `employee_departments` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `valid` tinyint(4) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `employee_departments`
---
-
-INSERT INTO `employee_departments` (`id`, `depertment`, `sort_name`, `created_at`, `updated_at`, `valid`) VALUES
-(1, 'Software Engineering', 'SWE', '2019-04-10 12:23:32', '2019-04-10 12:23:32', 1);
 
 -- --------------------------------------------------------
 
@@ -145,42 +74,6 @@ CREATE TABLE `employee_designations` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `valid` tinyint(4) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `employee_designations`
---
-
-INSERT INTO `employee_designations` (`id`, `designation`, `created_at`, `updated_at`, `valid`) VALUES
-(1, 'Senior Lecturer', '2019-04-21 14:07:50', '2019-04-21 14:07:50', 1),
-(2, 'Dept Head', '2019-04-26 12:17:07', '2019-04-26 12:17:07', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `employee_schedules`
---
-
-CREATE TABLE `employee_schedules` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `employee_id` int(11) NOT NULL COMMENT 'users.id',
-  `semister_id` int(11) NOT NULL COMMENT 'semister_id=semister.id',
-  `day_index` int(11) NOT NULL COMMENT 'schedule_days.day_index',
-  `start_time` time NOT NULL,
-  `end_time` time NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `valid` tinyint(4) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `employee_schedules`
---
-
-INSERT INTO `employee_schedules` (`id`, `employee_id`, `semister_id`, `day_index`, `start_time`, `end_time`, `created_at`, `updated_at`, `valid`) VALUES
-(1, 1, 2, 0, '09:00:00', '17:00:00', '2019-05-01 00:12:41', '2019-05-01 00:12:41', 1),
-(2, 1, 2, 1, '08:30:00', '16:00:00', '2019-05-01 00:12:41', '2019-05-01 00:12:41', 1),
-(3, 2, 3, 0, '08:30:00', '17:00:00', '2019-05-01 12:07:13', '2019-05-01 12:07:13', 1),
-(4, 2, 3, 2, '09:00:00', '16:00:00', '2019-05-01 12:07:13', '2019-05-01 12:07:13', 1);
 
 -- --------------------------------------------------------
 
@@ -252,15 +145,6 @@ CREATE TABLE `income_categories` (
   `valid` tinyint(4) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `income_categories`
---
-
-INSERT INTO `income_categories` (`id`, `user_id`, `category_name`, `category_remarks`, `created_at`, `updated_at`, `valid`) VALUES
-(1, 1, 'Salary', 'Company Job Income.', '2019-08-28 13:01:12', '2019-08-28 13:01:12', 1),
-(2, 1, 'Salarydg', 'Company Job Income.', '2019-08-28 13:46:26', '2019-08-28 13:46:26', 1),
-(3, 1, 'Salarydfghj', 'Company Job Income.', '2019-08-28 13:49:06', '2019-08-28 13:49:06', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -276,6 +160,7 @@ CREATE TABLE `lenders` (
   `lender_remarks` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0=Inactive, 1=Active',
   `valid` tinyint(4) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -349,63 +234,6 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `schedule_days`
---
-
-CREATE TABLE `schedule_days` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `day_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `day_index` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `schedule_days`
---
-
-INSERT INTO `schedule_days` (`id`, `day_name`, `day_index`, `created_at`, `updated_at`) VALUES
-(1, 'Saturday', 0, '2019-02-21 20:00:00', NULL),
-(2, 'Sunday', 1, '2019-02-21 20:00:00', NULL),
-(3, 'Monday', 2, '2019-02-21 20:00:00', NULL),
-(4, 'Tuesday', 3, '2019-02-21 20:00:00', NULL),
-(5, 'Wednesday', 4, '2019-02-21 21:00:00', NULL),
-(6, 'Thursday', 5, '2019-02-21 20:00:00', NULL),
-(7, 'Friday', 6, '2019-02-21 20:00:00', NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `semisters`
---
-
-CREATE TABLE `semisters` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `employee_id` int(11) NOT NULL COMMENT 'users.id',
-  `semister_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `year` year(4) NOT NULL,
-  `version` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_type` tinyint(4) NOT NULL COMMENT '1 = supervisor, 2 = employee',
-  `start_date` date NOT NULL,
-  `approval_status` int(11) NOT NULL DEFAULT '0',
-  `approved_by` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `valid` tinyint(4) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `semisters`
---
-
-INSERT INTO `semisters` (`id`, `employee_id`, `semister_name`, `year`, `version`, `user_type`, `start_date`, `approval_status`, `approved_by`, `created_at`, `updated_at`, `valid`) VALUES
-(1, 1, 'Fall', 2019, 'v-1', 1, '2019-04-02', 0, NULL, '2019-04-26 13:25:37', '2019-04-26 13:51:07', 1),
-(2, 1, 'Spring', 2019, 'v-1', 1, '2019-04-06', 0, NULL, '2019-04-26 13:46:10', '2019-04-26 13:46:10', 1),
-(3, 2, 'Summer', 2019, 'v-1', 1, '2019-05-01', 0, NULL, '2019-05-01 12:06:32', '2019-05-01 12:06:32', 1);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `users`
 --
 
@@ -420,7 +248,7 @@ CREATE TABLE `users` (
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `generate_emp_id` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `generate_emp_id` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `is_supervisor` tinyint(4) NOT NULL DEFAULT '0',
   `is_employee` tinyint(4) NOT NULL DEFAULT '0',
   `assign_advisor` int(11) NOT NULL DEFAULT '0',
@@ -432,9 +260,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `depertment_id`, `designation_id`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `generate_emp_id`, `is_supervisor`, `is_employee`, `assign_advisor`, `valid`) VALUES
-(1, 'Rafikul Islam Rafi', 1, 2, 'rafikulswe@gmail.com', NULL, '$2y$10$IWGhwRHClTWxTGk91.UXceS8jPB/P2WV3yDEsqo0qz3/GWQgznMjC', '0d82TtU0OUyg459GO4xa0zlCJ3mbWiEYvRvUheh6b8g5KOIxObCsCnZYcnF2', '2019-04-26 12:25:25', '2019-04-26 12:25:25', '001', 1, 0, 0, 1),
-(2, 'Miske Tara Zannat', 1, 1, 'moni@gmail.com', NULL, '$2y$10$/LEh3Kb1C.Puld0xSyvRJOAT3mBEZF1G.1FrqTUtLpP4W.fandUqa', 'YP4KKwW7v7Gpt3MVM5ndQ3ABzEadHyKha8yucrvH87klQTa0Aa8rv2rna8Cn', '2019-05-01 12:05:56', '2019-05-01 12:05:56', '002', 1, 0, 0, 1),
-(3, 'Najmul Hasan Sobuj', 1, 1, 'sobuj@gmail.com', NULL, '$2y$10$DXHwtG.JyKoxw7Dx00lqPuaqExrN/E6o3jPAn3FHOy.7DSo0855EW', 'SOhVes87SnYWxdR9QO9bEoUNOSIVbGhK0UtoGQtsvgP5R6KLdXwqxgIvLVHK', '2019-05-23 06:01:33', '2019-05-23 06:01:33', '003', 0, 1, 1, 1);
+(1, 'Md. Rafikul Islam Rafi', NULL, NULL, 'rafikulswe@gmail.com', NULL, '$2y$10$nN9XeJGlLqTtmgJL4aULueZ7n04OA5V/qx.K.dloDosms.DKmypQ2', NULL, '2019-09-04 13:11:31', '2019-09-04 13:11:31', NULL, 0, 0, 0, 1);
 
 --
 -- Indexes for dumped tables
@@ -448,18 +274,6 @@ ALTER TABLE `admins`
   ADD UNIQUE KEY `admins_email_unique` (`email`);
 
 --
--- Indexes for table `daily_attendances`
---
-ALTER TABLE `daily_attendances`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `employee_attendance_activities`
---
-ALTER TABLE `employee_attendance_activities`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `employee_departments`
 --
 ALTER TABLE `employee_departments`
@@ -469,12 +283,6 @@ ALTER TABLE `employee_departments`
 -- Indexes for table `employee_designations`
 --
 ALTER TABLE `employee_designations`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `employee_schedules`
---
-ALTER TABLE `employee_schedules`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -526,18 +334,6 @@ ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
--- Indexes for table `schedule_days`
---
-ALTER TABLE `schedule_days`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `semisters`
---
-ALTER TABLE `semisters`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -554,30 +350,15 @@ ALTER TABLE `users`
 ALTER TABLE `admins`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT for table `daily_attendances`
---
-ALTER TABLE `daily_attendances`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT for table `employee_attendance_activities`
---
-ALTER TABLE `employee_attendance_activities`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
---
 -- AUTO_INCREMENT for table `employee_departments`
 --
 ALTER TABLE `employee_departments`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `employee_designations`
 --
 ALTER TABLE `employee_designations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `employee_schedules`
---
-ALTER TABLE `employee_schedules`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `expenses`
 --
@@ -597,7 +378,7 @@ ALTER TABLE `incomes`
 -- AUTO_INCREMENT for table `income_categories`
 --
 ALTER TABLE `income_categories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `lenders`
 --
@@ -614,20 +395,10 @@ ALTER TABLE `loans`
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
--- AUTO_INCREMENT for table `schedule_days`
---
-ALTER TABLE `schedule_days`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
---
--- AUTO_INCREMENT for table `semisters`
---
-ALTER TABLE `semisters`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;COMMIT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

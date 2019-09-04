@@ -14,15 +14,19 @@
                                 </div>
                                 <div class="col-xs-9">
                                     <div class="numbers">
-                                        <p>All User</p>
-                                        01
+                                        <p>All Lenders</p>
+                                        @if (@$all_lenders < 9)
+                                        0{{@$all_lenders}}
+                                        @else 
+                                        {{@$all_lenders}}
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                             <div class="footer">
                                 <hr />
                                 <div class="stats">
-                                    <a href="#"><i class="fa fa-share-square fa-lg"></i> View</a>
+                                    <a href="{{route('lender')}}"><i class="fa fa-share-square fa-lg"></i> View</a>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +76,7 @@
                             <div class="footer">
                                 <hr />
                                 <div class="stats">
-                                    <a href="#"><i class="fa fa-share-square fa-lg"></i> View</a>
+                                    <a href="{{route('expense')}}"><i class="fa fa-share-square fa-lg"></i> View</a>
                                 </div>
                             </div>
                         </div>
@@ -125,14 +129,14 @@
                                         <thead>
                                             <tr>
                                                 <th>Date</th>
-                                                <th>Category</th>
+                                                <th>Income/Expense Name</th>
                                                 <th class="details">Details</th>
                                                 <th>Credit</th>
                                                 <th>Debit</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($last_7days_income as $data)
+                                            @foreach($last_7days_income as $key => $data)
                                             <tr>
                                                 <td>{{$data->income_date}}</td>
                                                 <td>{{$data->income_name}}</td>
@@ -141,10 +145,10 @@
                                                 <td>---</td>
                                             </tr>
                                             @endforeach
-                                            @foreach($last_7days_expense as $data)
+                                            @foreach($last_7days_expense as $key => $data)
                                             <tr>
                                                 <td>{{$data->expense_date}}</td>
-                                                <td>{{$data->expcate_name}}</td>
+                                                <td>{{$data->expense_name}}</td>
                                                 <td class="details">{{$data->expense_details}}</td>
                                                 <td>---</td>
                                                 <td>{{$data->expense_amount}}</td>
@@ -156,8 +160,8 @@
                                                 <th></th>
                                                 <th></th>
                                                 <th class="details" style="text-align: right;">Total</th>
-                                                <th>{{$last_7days_all_income}}</th>
-                                                <th>{{$last_7days_all_expense}}</th>
+                                                <th>{{$last_7days_income->sum('income_amount')}}</th>
+                                                <th>{{$last_7days_expense->sum('expense_amount')}}</th>
                                             </tr>
                                         </tfoot>
                                     </table>

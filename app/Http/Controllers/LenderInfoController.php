@@ -11,6 +11,10 @@ use Session;
 use App\User;
 use App\Lender;
 use App\Loan;
+use App\Income;
+use App\Expense;
+use App\ExpenseCategory;
+use App\IncomeCategory;
 
 class LenderInfoController extends Controller
 {
@@ -226,6 +230,7 @@ class LenderInfoController extends Controller
             $paid_status = 1;
         }
         if ($validator->passes()) {
+            DB::beginTransaction();
             Loan::create([
                 "lender_id"        => $lender_id,
                 "amount"           => $request->amount,
@@ -236,6 +241,42 @@ class LenderInfoController extends Controller
                 "paid_status"      => $paid_status, //0 = No, 1 = Yes
                 "user_id"          => $user_id
             ]);
+            if ($modalType == 1 || $modalType == 4) {
+                $income_category = IncomeCategory::where('valid', 1)->where('user_id', $user_id)->where('category_name', 'Loan')->first();
+                if(empty($income_category->id)){
+                    $income_category = IncomeCategory::create([
+                        "category_name"    => 'Loan',
+                        "category_remarks" => 'Taking a loan or payment of a given loan.',
+                        "user_id"          => $user_id
+                    ]);
+                }
+                Income::create([
+                    "income_category_id" => $income_category->id,
+                    "income_name"        => $modalType == 1 ? 'Loan Received' : 'Loan Payment',
+                    "income_amount"      => $request->amount,
+                    "income_details"     => $modalType == 1 ? 'I have taken a loan' : 'I have received a Loan Payment',
+                    "income_date"        => $request->transaction_date,
+                    "user_id"            => $user_id
+                ]);
+            } else {
+                $expense_category = ExpenseCategory::where('valid', 1)->where('user_id', $user_id)->where('category_name', 'Loan')->first();
+                if(empty($expense_category->id)){
+                    $expense_category = ExpenseCategory::create([
+                        "category_name"    => 'Loan',
+                        "category_remarks" => 'Taking a loan or payment of a given loan.',
+                        "user_id"          => $user_id
+                    ]);
+                }
+                Expense::create([
+                    "expense_category_id" => $expense_category->id,
+                    "expense_name"        => $modalType == 2 ? 'Loan Paid' : 'Loan Given',
+                    "expense_amount"      => $request->amount,
+                    "expense_details"     => $modalType == 2 ? 'I have paid a loan': 'I have given a Loan',
+                    "expense_date"        => $request->transaction_date,
+                    "user_id"             => $user_id
+                ]);
+            }
+            DB::commit(); 
             if ($modalType == 1) {
                 return redirect()->route('lender.show', [$lender_id])->with('message', 'Loan has been Received');
             } elseif ($modalType == 2) {
@@ -245,6 +286,7 @@ class LenderInfoController extends Controller
             } else {
                 return redirect()->route('lender.show', [$lender_id])->with('message', 'Loan has been Payment');
             }
+            
         } else {
             return redirect()->route('lender.show', [$lender_id])->with('error', 'Please fill up the required field');
         }

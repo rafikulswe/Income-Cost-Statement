@@ -59,6 +59,10 @@
                                 <div class="panel-footer text-center">
                                     <button type="submit" class="btn btn-fill btn-success btnu">SAVE</button>
                                     <a href="{{url('/incomeCategory')}}" class="btn btn-fill btn-default btnu">Back to List</a>
+                                    @php
+                                        $previous_url = $_SERVER['HTTP_REFERER'];
+                                    @endphp
+                                    <a href="{{url($previous_url)}}" class="btn btn-fill btn-default btnu">Back to Previous</a>
                                 </div>
                             </div>
                         </form>
