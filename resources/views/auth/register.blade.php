@@ -78,7 +78,7 @@
 <section class="body-sign">
     <div class="center-sign">
         <a href="/" class="logo pull-left">
-            <img src="{{ asset('public/authContents/images/logo.png') }}" height="54" alt="Porto Admin" />
+            <img src="{{ asset('public/authContents/images/mybanklogo.png') }}" height="54" alt="Porto Admin" />
         </a>
 
         <div class="panel panel-sign">
@@ -154,7 +154,7 @@
                         <a class="btn btn-twitter mb-md ml-xs mr-xs">Connect with <i class="fa fa-twitter"></i></a>
                     </div>
 
-                    <p class="text-center">Don't have an account yet? <a href="{{ route('register') }}">Sign Up!</a>
+                    <p class="text-center">Have you already an account? <a href="{{ route('login') }}">Sign In!</a>
 
                 </form>
             </div>

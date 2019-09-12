@@ -44,7 +44,7 @@
                                                 <td>{{$lender->lender_name}}</td>
                                                 <td>{{$lender->lender_phone}}</td>
                                                 <td>{{$lender->lender_email}}</td>
-                                                <td>@if($lender->total_due_amount == 0) In Active @else Active @endif</td>
+                                                <td>@if($lender->total_due_amount == 0) Deactive @else Active @endif</td>
                                                 <td>
                                                     <a href="{{route('lender.show', [$lender->id])}}"><i class="fa fa-universal-access fa-lg man_view"></i></a>
                                                     <a href="{{route('lender.edit', [$lender->id])}}"><i class="fa fa-edit fa-lg man_edit"></i></a>

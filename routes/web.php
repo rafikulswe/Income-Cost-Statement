@@ -24,7 +24,7 @@ Route::get('home', 'HomeController@index')->name('home');
 Route::get('dashboard', 'HomeController@dashboard')->name('dashboard');
 
 // Manage
-Route::get('/manage', 'ManageController@index')->name('manage');
+Route::get('manage', 'ManageController@index')->name('manage');
 
 // Income Category (Resource)
 Route::resource('incomeCategory', 'IncomeCategoryController');
@@ -46,6 +46,10 @@ Route::get('expense', array('access' => ['resource|expense.index'], 'as' => 'exp
 Route::resource('lender', 'LenderInfoController');
 Route::get('lender', array('access' => ['resource|lender.index'], 'as' => 'lender', 'uses' => 'LenderInfoController@index'));
 Route::post('lender-loan-transaction/{modalType}', array('access' => ['resource|lender.edit'], 'as' => 'lenderLoanTransaction', 'uses' => 'LenderInfoController@loanTransaction'));
+
+// Todo List
+Route::resource('todoList', 'ToDoListController');
+Route::get('todoList', array('access' => ['resource|todoList.index'], 'as' => 'todoList', 'uses' => 'ToDoListController@index'));
 
 Route::prefix('admin')->group(function() {
 	Route::get('/','softAdmin\LoginController@showLoginForm')->name('admin.login');

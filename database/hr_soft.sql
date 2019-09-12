@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 04, 2019 at 09:15 PM
+-- Generation Time: Sep 08, 2019 at 10:14 PM
 -- Server version: 10.1.22-MariaDB
 -- PHP Version: 7.1.4
 
@@ -94,6 +94,15 @@ CREATE TABLE `expenses` (
   `valid` tinyint(4) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `expenses`
+--
+
+INSERT INTO `expenses` (`id`, `user_id`, `expense_category_id`, `expense_name`, `expense_details`, `expense_amount`, `expense_date`, `created_at`, `updated_at`, `valid`) VALUES
+(1, 1, 1, 'August House Rent', NULL, 14000.00, '2019-09-05', '2019-09-04 13:38:47', '2019-09-04 13:38:47', 1),
+(2, 1, 2, 'Loan Given', 'I have given a Loan', 5000.00, '2019-09-05', '2019-09-04 13:43:32', '2019-09-04 13:43:32', 1),
+(3, 1, 1, 'Utility Bill', NULL, 2500.00, '2019-09-05', '2019-09-05 11:47:58', '2019-09-05 11:47:58', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -109,6 +118,14 @@ CREATE TABLE `expense_categories` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `valid` tinyint(4) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `expense_categories`
+--
+
+INSERT INTO `expense_categories` (`id`, `user_id`, `category_name`, `category_remarks`, `created_at`, `updated_at`, `valid`) VALUES
+(1, 1, 'House Rent', 'Have to pay 14000 Tk.', '2019-09-04 13:35:09', '2019-09-04 13:35:09', 1),
+(2, 1, 'Loan', 'Taking a loan or payment of a given loan.', '2019-09-04 13:43:32', '2019-09-04 13:43:32', 1);
 
 -- --------------------------------------------------------
 
@@ -129,6 +146,13 @@ CREATE TABLE `incomes` (
   `valid` tinyint(4) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `incomes`
+--
+
+INSERT INTO `incomes` (`id`, `user_id`, `income_category_id`, `income_name`, `income_details`, `income_amount`, `income_date`, `created_at`, `updated_at`, `valid`) VALUES
+(1, 1, 1, 'August Month Salary', NULL, 50000.00, '2019-09-05', '2019-09-04 13:33:00', '2019-09-04 13:33:00', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -144,6 +168,15 @@ CREATE TABLE `income_categories` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `valid` tinyint(4) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `income_categories`
+--
+
+INSERT INTO `income_categories` (`id`, `user_id`, `category_name`, `category_remarks`, `created_at`, `updated_at`, `valid`) VALUES
+(1, 1, 'Salary', 'Innovation Information System Ltd.', '2019-09-04 13:29:01', '2019-09-04 13:29:01', 1),
+(2, 1, 'Extra Project Income', 'Personal Project', '2019-09-05 13:05:42', '2019-09-05 13:05:42', 1),
+(3, 1, 'ABC', 'N/A', '2019-09-05 13:47:46', '2019-09-05 13:47:46', 1);
 
 -- --------------------------------------------------------
 
@@ -163,6 +196,13 @@ CREATE TABLE `lenders` (
   `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0=Inactive, 1=Active',
   `valid` tinyint(4) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `lenders`
+--
+
+INSERT INTO `lenders` (`id`, `user_id`, `lender_name`, `lender_phone`, `lender_email`, `lender_remarks`, `created_at`, `updated_at`, `status`, `valid`) VALUES
+(1, 1, 'Imdadul Hoque', '01729346959', 'imdadul@gmail.com', NULL, '2019-09-04 13:41:32', '2019-09-04 13:41:32', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -184,6 +224,13 @@ CREATE TABLE `loans` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `valid` tinyint(4) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `loans`
+--
+
+INSERT INTO `loans` (`id`, `user_id`, `lender_id`, `amount`, `transaction_date`, `return_date`, `remarks`, `loan_type`, `paid_status`, `created_at`, `updated_at`, `valid`) VALUES
+(1, 1, 1, 5000.00, '2019-09-05', '2019-09-12', NULL, 3, 0, '2019-09-04 13:43:32', '2019-09-04 13:43:32', 1);
 
 -- --------------------------------------------------------
 
@@ -217,7 +264,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (13, '2019_08_26_185502_create_expense_categories_table', 6),
 (14, '2019_08_26_185518_create_income_categories_table', 6),
 (15, '2019_08_26_190305_create_lenders_table', 6),
-(16, '2019_08_26_190745_create_loans_table', 6);
+(16, '2019_08_26_190745_create_loans_table', 6),
+(17, '2019_09_08_192217_create_todo_lists_table', 7);
 
 -- --------------------------------------------------------
 
@@ -230,6 +278,31 @@ CREATE TABLE `password_resets` (
   `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `todo_lists`
+--
+
+CREATE TABLE `todo_lists` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `note` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `valid` tinyint(4) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `todo_lists`
+--
+
+INSERT INTO `todo_lists` (`id`, `user_id`, `title`, `note`, `created_at`, `updated_at`, `valid`) VALUES
+(1, 1, 'Next Week Bazar Khoroch', 'Ache', '2019-09-08 13:26:05', '2019-09-08 13:42:18', 1),
+(2, 1, 'Habi Jabi', 'Nai', '2019-09-08 13:28:02', '2019-09-08 13:28:02', 1),
+(3, 1, 'Arekta', '<p>Ache to Valoi</p>\r\n<p>amio achi&nbsp;</p>', '2019-09-08 13:47:44', '2019-09-08 13:57:28', 0);
 
 -- --------------------------------------------------------
 
@@ -260,7 +333,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `depertment_id`, `designation_id`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `generate_emp_id`, `is_supervisor`, `is_employee`, `assign_advisor`, `valid`) VALUES
-(1, 'Md. Rafikul Islam Rafi', NULL, NULL, 'rafikulswe@gmail.com', NULL, '$2y$10$nN9XeJGlLqTtmgJL4aULueZ7n04OA5V/qx.K.dloDosms.DKmypQ2', NULL, '2019-09-04 13:11:31', '2019-09-04 13:11:31', NULL, 0, 0, 0, 1);
+(1, 'Md. Rafikul Islam Rafi', NULL, NULL, 'rafikulswe@gmail.com', NULL, '$2y$10$nN9XeJGlLqTtmgJL4aULueZ7n04OA5V/qx.K.dloDosms.DKmypQ2', 'LHvhxPbNCluSJWCG40tDtZeg33XnvrrlPKvryFL7SI9ivcEbkcy7i6Y7dEyS', '2019-09-04 13:11:31', '2019-09-04 13:11:31', NULL, 0, 0, 0, 1);
 
 --
 -- Indexes for dumped tables
@@ -334,6 +407,12 @@ ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
+-- Indexes for table `todo_lists`
+--
+ALTER TABLE `todo_lists`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -363,37 +442,42 @@ ALTER TABLE `employee_designations`
 -- AUTO_INCREMENT for table `expenses`
 --
 ALTER TABLE `expenses`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `expense_categories`
 --
 ALTER TABLE `expense_categories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `incomes`
 --
 ALTER TABLE `incomes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `income_categories`
 --
 ALTER TABLE `income_categories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `lenders`
 --
 ALTER TABLE `lenders`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `loans`
 --
 ALTER TABLE `loans`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+--
+-- AUTO_INCREMENT for table `todo_lists`
+--
+ALTER TABLE `todo_lists`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `users`
 --

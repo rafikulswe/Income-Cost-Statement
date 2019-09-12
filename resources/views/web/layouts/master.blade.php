@@ -19,7 +19,7 @@ $page=($page=='home')?'home':$page;
         <meta name="viewport" content="width=device-width" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'MYBANK') }}</title>
         <link rel="icon" type="image/png" href="{{asset('public/contents/img/admin-favicon.png')}}">
         <link href="{{asset('public/contents/css/bootstrap.min.css')}}" rel="stylesheet" />
         <link href="{{asset('public/contents/css/animate.min.css')}}" rel="stylesheet"/>
@@ -37,8 +37,8 @@ $page=($page=='home')?'home':$page;
             <div class="sidebar" data-background-color="white" data-active-color="danger">
                 <div class="sidebar-wrapper">
                     <div class="logo">
-                        <a href="#" class="simple-text">
-                            Khorcha
+                        <a href="{{route('home')}}" class="simple-text">
+                            My Bank
                         </a>
                     </div>
                     <ul class="nav">
@@ -72,8 +72,14 @@ $page=($page=='home')?'home':$page;
                                 <p>Loan Information</p>
                             </a>
                         </li>
-                        <li>
-                            <a href="{{url('/admin/summary')}}">
+                        <li @if($page=="todoList") class="active" @endif>
+                            <a href="{{route('todoList')}}">
+                                <i class="fa fa-gg-circle"></i>
+                                <p>TO-DO List</p>
+                            </a>
+                        </li>
+                        {{-- <li>
+                            <a href="#">
                                 <i class="fa fa-gg-circle"></i>
                                 <p>Summary</p>
                             </a>
@@ -90,7 +96,7 @@ $page=($page=='home')?'home':$page;
                                 <i class="fa fa-recycle"></i>
                                 <p>Recycle Bin</p>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="active-pro">
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="fa fa-power-off"></i>
@@ -113,9 +119,9 @@ $page=($page=='home')?'home':$page;
                                 <span class="icon-bar bar2"></span>
                                 <span class="icon-bar bar3"></span>
                             </button>
-                            <a class="navbar-brand" href="@if($page=="home"){{route('home')}} @elseif($page=="dashboard"){{route('dashboard')}} @elseif($page=="income"){{route('income')}} @elseif($page=="manage"){{route('manage')}} @elseif($page=="incomeCategory"){{route('incomeCategory')}} @elseif($page=="expense"){{route('expense')}} @endif">
+                            <a class="navbar-brand" href="@if($page=="home"){{route('home')}} @elseif($page=="dashboard"){{route('dashboard')}} @elseif($page=="income"){{route('income')}} @elseif($page=="manage"){{route('manage')}} @elseif($page=="incomeCategory"){{route('incomeCategory')}} @elseif($page=="expense"){{route('expense')}} @elseif($page=="todoList"){{route('todoList')}} @endif">
 
-                                @if($page=="home")Welcome @elseif($page=="dashboard")Dashboard @elseif($page=="income") Income @elseif($page=="manage") Manage @elseif($page=="incomeCategory") Income Category @elseif($page=="expense") Expense @elseif($page=="lender") Lender @endif
+                                @if($page=="home")Welcome @elseif($page=="dashboard")Dashboard @elseif($page=="income") Income @elseif($page=="manage") Manage @elseif($page=="incomeCategory") Income Category @elseif($page=="expense") Expense @elseif($page=="lender") Lender @elseif($page=="todoList") To-Do List @endif
                             </a>
                         </div>
                         <div class="collapse navbar-collapse">
@@ -140,7 +146,7 @@ $page=($page=='home')?'home':$page;
                 <ul class="breadcrumb">
                     <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
                     <li>
-                        @if($page=="home")Welcome @elseif($page=="dashboard")Dashboard @elseif($page=="income") Income @elseif($page=="manage") Manage @elseif($page=="incomeCategory") Income Category @elseif($page=="expense") Expense @elseif($page=="lender") Lender @endif
+                        @if($page=="home")Welcome @elseif($page=="dashboard")Dashboard @elseif($page=="income") Income @elseif($page=="manage") Manage @elseif($page=="incomeCategory") Income Category @elseif($page=="expense") Expense @elseif($page=="lender") Lender @elseif($page=="todoList") To-Do List @endif
                     </li>
                 </ul>
 
@@ -163,18 +169,22 @@ $page=($page=='home')?'home':$page;
     <script src="{{asset('public/contents/js/demo.js')}}"></script>
     <script src="{{asset('public/contents/js/dataTables.min.js')}}"></script>
     <script src="{{asset('public/contents/js/custom.js')}}"></script>
+    <script src="{{asset('public/contents/js/tinymce.js')}}"></script>
     <script src="{{ asset('public/authContents/validation/js/formValidation.min.js') }}"></script>
 
     @stack('javaScript')
     <script>
-  $(document).ready(function(){
-    $( "#search" ).click(function() {
-      var from = $('#datepickerForm').val();
-      var to = $('#datepickerTo').val();
-      var base_url = window.location.origin;
-      var url = base_url+'/admin/summary/search/'+from+'/'+to;
-      location.href = url;
+    $(document).ready(function(){
+        $( "#search" ).click(function() {
+        var from = $('#datepickerForm').val();
+        var to = $('#datepickerTo').val();
+        var base_url = window.location.origin;
+        var url = base_url+'/admin/summary/search/'+from+'/'+to;
+        location.href = url;
+        });
     });
-  });
+    tinymce.init({
+        selector: '#tinytextarea'
+    });
 </script>
 </html>

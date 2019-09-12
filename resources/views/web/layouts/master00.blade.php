@@ -21,10 +21,10 @@ $page=($page=='admin')?'index':$page;
 		<title>{{ config('app.name', 'Laravel') }}</title>
 		<!-- CSRF Token -->
 	    <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta name="keywords" content="HTML5 Admin Template" />
+        <meta name="keywords" content="Income-Cost Statement" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-		<meta name="description" content="Porto Admin - Responsive HTML5 Template">
+		<meta name="description" content="Income-Cost Statement - Keep Record of Your Earning and Expense.">
 		<meta name="author" content="okler.net">
 		<meta name="author" content="JSOFT.net">
 

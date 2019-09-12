@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Charts;
 use Auth;
+use Carbon\Carbon;
 use App\Income;
 use App\Lender;
 use App\Expense;
-use Carbon\Carbon;
+use App\IncomeCategory;
 
 class HomeController extends Controller
 {
@@ -56,8 +57,20 @@ class HomeController extends Controller
         $data['all_lenders'] = $all_lenders = Lender::where('valid', 1)->where('user_id', $user_id)->count();
         $to = Carbon::now()->format('Y-m-d');
         $from = date('Y-m-d', strtotime('-7 days', strtotime($to)));
-        $data['last_7days_income'] = Income::where('valid',1)->where('user_id', $user_id)->whereBetween('income_date', [$from, $to])->get();
-        $data['last_7days_expense'] = Expense::where('valid',1)->where('user_id', $user_id)->whereBetween('expense_date', [$from, $to])->get();
+        // $to = date('Y-m-d');
+        // dd($to);
+        $data['last_7days_income'] = Income::join('income_categories', 'income_categories.id', '=', 'incomes.income_category_id')
+            ->select('incomes.*', 'income_categories.category_name')
+            ->whereBetween('incomes.income_date', [$from, $to])
+            ->where('incomes.user_id', $user_id)
+            ->where('incomes.valid', 1)
+            ->get();
+        $data['last_7days_expense'] = Expense::join('expense_categories', 'expense_categories.id', '=', 'expenses.expense_category_id')
+            ->select('expenses.*', 'expense_categories.category_name')
+            ->whereBetween('expenses.expense_date', [$from, $to])
+            ->where('expenses.user_id', $user_id)
+            ->where('expenses.valid', 1)
+            ->get();
         $data['totalIncome'] = Income::where('valid',1)->where('user_id', $user_id)->sum('income_amount');
         $data['totalExpense'] = Expense::where('valid',1)->where('user_id', $user_id)->sum('expense_amount');
         return view('web.dashboard.home', $data);

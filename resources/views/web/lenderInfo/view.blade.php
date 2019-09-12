@@ -88,7 +88,7 @@
                                             <td>@if(@$total_due_amount > 0)
                                                 ৳ {{@$total_due_amount}}/=  (I have to pay)
                                                 @else 
-                                                ৳ {{@$total_due_amount}}/=  (He/She have to pay)
+                                                ৳ {{@$total_due_amount}}/=  {{@$total_due_amount == 0 ?'' : '(He/She have to pay)'}}
                                                 @endif
                                             </td>
                                         </tr>

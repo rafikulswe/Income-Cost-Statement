@@ -18,7 +18,7 @@
                                 <div class="content table-responsive table-full-width">
                                     <div class="timeline timeline-simple mt-xlg mb-md">
                                         <h1 class="text-center mb25">Hi, <big>{{ Auth::user()->name }}</big></h1><hr>
-                                        <h2 class="text-center mt30 mb30">Welcome to<br>Our Employee Panel</h2>
+                                        <h2 class="text-center mt30 mb30">Welcome to<br>Income Cost Panel.</h2>
                                     </div>
                                 </div>
                             </div>

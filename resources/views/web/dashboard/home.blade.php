@@ -128,17 +128,19 @@
                                     <table id="seveendayreport" class="table table-striped table-bordered table_customize table_summary">
                                         <thead>
                                             <tr>
-                                                <th>Date</th>
-                                                <th>Income/Expense Name</th>
-                                                <th class="details">Details</th>
-                                                <th>Credit</th>
-                                                <th>Debit</th>
+                                                <th width="10%">Date</th>
+                                                <th width="10%">Category</th>
+                                                <th width="25%">Income/Expense Name</th>
+                                                <th width="35%" class="details">Details</th>
+                                                <th width="10%">Debit</th>
+                                                <th width="10%">Credit</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach($last_7days_income as $key => $data)
                                             <tr>
                                                 <td>{{$data->income_date}}</td>
+                                                <td>{{$data->category_name}}</td>
                                                 <td>{{$data->income_name}}</td>
                                                 <td class="details">{{$data->income_details}}</td>
                                                 <td>{{$data->income_amount}}</td>
@@ -148,6 +150,7 @@
                                             @foreach($last_7days_expense as $key => $data)
                                             <tr>
                                                 <td>{{$data->expense_date}}</td>
+                                                <td>{{$data->category_name}}</td>
                                                 <td>{{$data->expense_name}}</td>
                                                 <td class="details">{{$data->expense_details}}</td>
                                                 <td>---</td>
@@ -157,9 +160,7 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th></th>
-                                                <th></th>
-                                                <th class="details" style="text-align: right;">Total</th>
+                                                <th colspan="4" class="details" style="text-align: right;">Total</th>
                                                 <th>{{$last_7days_income->sum('income_amount')}}</th>
                                                 <th>{{$last_7days_expense->sum('expense_amount')}}</th>
                                             </tr>

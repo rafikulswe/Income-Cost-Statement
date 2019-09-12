@@ -5,15 +5,22 @@
 		<!-- Basic -->
 		<meta charset="UTF-8">
 
-		<title>{{ config('app.name', 'Laravel') }}</title>
+		<title>{{ config('app.name', 'MYBANK') }}</title>
+		<link rel="icon" type="image/png" href="{{asset('public/contents/img/admin-favicon.png')}}">
 		<!-- CSRF Token -->
 	    <meta name="csrf-token" content="{{ csrf_token() }}">
-		<meta name="keywords" content="HTML5 Admin Template" />
+		<meta name="keywords" content="Income-Cost Statement" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-		<meta name="description" content="Porto Admin - Responsive HTML5 Template">
+		<meta name="description" content="Income-Cost Statement - Keep Record of Your Earning and Expense.">
 		<meta name="author" content="okler.net">
 		<meta name="author" content="JSOFT.net">
+
+		{{-- og Property --}}
+		<meta property="og:title" content="Income-Cost Statement">
+		<meta property="og:description" content="Keep Record of Your Earning and Expense.">
+		<meta property="og:image" content="{{asset('public/authContents/images/mybanklogo.png')}}">
+		<meta property="og:url" content="https://amaruparjon.com/">
 
 		<!-- Mobile Metas -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
